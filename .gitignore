@@ -1,0 +1,7 @@
+#ignore server's starting point
+/index.php
+
+#ignore phpStorm project file
+/.idea/
+
+/.my-credentials
