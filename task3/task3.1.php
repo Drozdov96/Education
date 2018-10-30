@@ -11,8 +11,8 @@ echo momsThinkingProcess($temperatureToday, $temperatureTomorrow, $temperatureYe
 
 
 
-function momsThinkingProcess($temperatureToday, $temperatureTomorrow, $temperatureYesterday,
-							 $isRaining, $phraseFromAnya)
+function momsThinkingProcess(int $temperatureToday, int $temperatureTomorrow, int $temperatureYesterday,
+							 bool $isRaining, string $phraseFromAnya)
 {
 	$momsIncomingSentence="";
 	
@@ -20,35 +20,28 @@ function momsThinkingProcess($temperatureToday, $temperatureTomorrow, $temperatu
 		substr_count($phraseFromAnya, "заморозки")>0 && substr_count($phraseFromAnya, "замерзла")>0 ||
 		substr_count($phraseFromAnya, "холодно")>0 && substr_count($phraseFromAnya, "замерзла")>0) &&
 	   ($temperatureYesterday>$temperatureToday && $temperatureToday>$temperatureTomorrow) &&
-	   ($temperatureToday-$temperatureTomorrow)>5)
-	{
+	   ($temperatureToday-$temperatureTomorrow)>5) {
 		$momsIncomingSentence="*Сказано голосом Гендальфа* Ты не пройдёшь!";
 	}else{
 		
-		if($temperatureToday<13)
-		{
-			if($temperatureYesterday>=11 && $temperatureTomorrow>=11)
-			{
+		if($temperatureToday<13) {
+			if($temperatureYesterday>=11 && $temperatureTomorrow>=11) {
 				$momsIncomingSentence="Одень шапку. ";
-			}elseif($temperatureYesterday<11 || $temperatureTomorrow<11)
-			{
+			}elseif($temperatureYesterday<11 || $temperatureTomorrow<11) {
 				$momsIncomingSentence="Одень зимнюю шапку. ";
 			}
 		}
 		
 		if(($temperatureYesterday>$temperatureToday && $temperatureToday>$temperatureTomorrow) || 
 		   (substr_count($phraseFromAnya, "холодно")>0 || substr_count($phraseFromAnya, "заморозки")>0 ||
-		   substr_count($phraseFromAnya, "замерзла")>0))
-		{
+		   substr_count($phraseFromAnya, "замерзла")>0)) {
 			$momsIncomingSentence.="ты хорошо оделся? ";
 		}
 		
-		if($isRaining)
-		{
+		if($isRaining) {
 			$momsIncomingSentence.="и возьми с собой зонтик. ";
 			
-			if(($temperatureToday-$temperatureTomorrow)>3)
-			{
+			if(($temperatureToday-$temperatureTomorrow)>3) {
 				$momsIncomingSentence.="и шарф.";
 			}
 		}
