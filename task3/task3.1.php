@@ -24,21 +24,24 @@ function momsThinkingProcess(int $temperatureToday, int $temperatureTomorrow, in
 		$momsIncomingSentence="*Сказано голосом Гендальфа* Ты не пройдёшь!";
 	}else{
 		
-		if($temperatureToday<13) {
+		if($temperatureToday<13)
+		{
 			if($temperatureYesterday>=11 && $temperatureTomorrow>=11)
 			{
 				$momsIncomingSentence="Одень шапку. ";
 			}else{
 				$momsIncomingSentence="Одень зимнюю шапку. ";
 			}
-		}elseif($isTemperatureFall || $coldPhrasesNumber > 0) {
+		}elseif($isTemperatureFall || $coldPhrasesNumber > 0){
 			$momsIncomingSentence="Ты хорошо оделся? ";
 		}
 		
-		if($isRaining) {
+		if($isRaining)
+		{
 			$momsIncomingSentence.="И возьми с собой зонтик. ";
 			
-			if(rateTemperatureDropTomorrow($temperatureToday, $temperatureTomorrow, 3)) {
+			if(rateTemperatureDropTomorrow($temperatureToday, $temperatureTomorrow, 3))
+			{
 				$momsIncomingSentence.="И шарф.";
 			}
 		}
@@ -46,7 +49,8 @@ function momsThinkingProcess(int $temperatureToday, int $temperatureTomorrow, in
 	return $momsIncomingSentence;
 }
 
-function isDanger(bool $isTemperatureFall, int $coldPhrasesNum, bool $isTempDropOnFiveUnits){
+function isDanger(bool $isTemperatureFall, int $coldPhrasesNum, bool $isTempDropOnFiveUnits)
+{
     return  ($coldPhrasesNum >= 2)&& $isTemperatureFall && $isTempDropOnFiveUnits;
 }
 
@@ -55,10 +59,13 @@ function analyzeAnyaPhrase(string $phraseFromAnya)
     $analysisResult=0;
     if(substr_count($phraseFromAnya, "заморозки")>0)
         $analysisResult++;
+
     if(substr_count($phraseFromAnya, "замерзла")>0)
         $analysisResult++;
+
     if(substr_count($phraseFromAnya, "холодно")>0)
         $analysisResult++;
+
     return $analysisResult;
 }
 
