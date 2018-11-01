@@ -1,7 +1,7 @@
 <?php
 
 $temperatureToday = 12;
-$temperatureTomorrow = 7;
+$temperatureTomorrow = 6;
 $temperatureYesterday = 13;
 $isRaining = false;
 $phraseFromAnya = "холодно b и ызамерзла заморозки";
@@ -15,12 +15,13 @@ function momsThinkingProcess(int $temperatureToday, int $temperatureTomorrow, in
 							 bool $isRaining, string $phraseFromAnya)
 {
 	$momsIncomingSentence="";
-	
-	if((substr_count($phraseFromAnya, "заморозки")>0 && substr_count($phraseFromAnya, "холодно")>0 || 
-		substr_count($phraseFromAnya, "заморозки")>0 && substr_count($phraseFromAnya, "замерзла")>0 ||
-		substr_count($phraseFromAnya, "холодно")>0 && substr_count($phraseFromAnya, "замерзла")>0) &&
-	   ($temperatureYesterday>$temperatureToday && $temperatureToday>$temperatureTomorrow) &&
-	   ($temperatureToday-$temperatureTomorrow)>5) {
+
+    $isTemperatureFall=checkTemperatureFall($temperatureYesterday, $temperatureToday, $temperatureTomorrow);
+    $coldPhrasesNumber=analyzeAnyaPhrase($phraseFromAnya);
+
+    if(isDanger($isTemperatureFall, $coldPhrasesNumber,
+        rateTemperatureDrop($temperatureToday, $temperatureTomorrow, 5)))
+    {
 		$momsIncomingSentence="*Сказано голосом Гендальфа* Ты не пройдёшь!";
 	}else{
 		
@@ -47,6 +48,31 @@ function momsThinkingProcess(int $temperatureToday, int $temperatureTomorrow, in
 		}
 	
 	}
-	
 	return $momsIncomingSentence;
+}
+
+function isDanger(bool $isTemperatureFall, int $coldPhrasesNum, bool $isTempDropOnFiveUnits){
+    return  ($coldPhrasesNum > 2)&& $isTemperatureFall && $isTempDropOnFiveUnits;
+}
+
+function analyzeAnyaPhrase(string $phraseFromAnya)
+{
+    $analysisResult=0;
+    if(substr_count($phraseFromAnya, "заморозки")>0)
+        $analysisResult++;
+    if(substr_count($phraseFromAnya, "замерзла")>0)
+        $analysisResult++;
+    if(substr_count($phraseFromAnya, "холодно")>0)
+        $analysisResult++;
+    return $analysisResult;
+}
+
+function checkTemperatureFall(int $temperatureYesterday, int $temperatureToday, int $temperatureTomorrow)
+{
+    return $temperatureYesterday>$temperatureToday && $temperatureToday>$temperatureTomorrow;
+}
+
+function rateTemperatureDrop(int $temperatureToday, int $temperatureTomorrow, int $temperatureDropNumber)
+{
+    return ($temperatureToday-$temperatureTomorrow)>$temperatureDropNumber;
 }
