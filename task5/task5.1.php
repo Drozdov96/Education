@@ -4,6 +4,15 @@ $driver = new Driver();
 
 simulationEngineWork();
 
+class Driver
+{
+    function __call($name, $params)
+    {
+        echo "Received command '$name' with parametеr "
+            .array_pop($params)."<br>";
+    }
+}
+
 function simulationEngineWork()
 {
 	engageCylinderBlock();
@@ -11,6 +20,7 @@ function simulationEngineWork()
 
 function engageCylinderBlock()
 {
+    //неограниченная длина работы
 	while(true)
 	{
 		doStepOne();
@@ -53,15 +63,6 @@ function doStepFour()
 	engageCylinderTwo(3);
 	engageCylinderThree(2);
 	engageCylinderFour(1);
-}
-
-class Driver
-{
-	function __call($name, $params)
-	{
-		echo "Received command '$name' with parametr "
-			.array_pop($params)."<br>";
-	}
 }
 
 function engageCylinderOne(int $tact)
