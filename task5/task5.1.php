@@ -20,8 +20,8 @@ function simulationEngineWork()
 
 function engageCylinderBlock()
 {
-    //неограниченная длина работы
-	while(true)
+    //Длительность выполнения можно сделать неограниченной
+	for($i=0;$i<16;$i++)
 	{
 		doStepOne();
 
