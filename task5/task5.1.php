@@ -9,7 +9,7 @@ class Driver
     function __call($name, $params)
     {
         echo "Received command '$name' with parametеr "
-            .array_pop($params)."<br>";
+            .array_pop($params)."\n";
     }
 }
 

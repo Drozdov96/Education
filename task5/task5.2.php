@@ -1,6 +1,6 @@
 <?php
 
-echo incomingPhraseProcessing("Я иду гулять. Мы гуляли, гуляли, но не нагулялись.");
+echo incomingPhraseProcessing("Я иду гулять. \nМы гуляли, гуляли, но не нагулялись.");
 
 function incomingPhraseProcessing(string $incomingPhrase)
 {
@@ -18,11 +18,13 @@ function countSentences(array &$PhraseArray)
 {
 	$sentenceCounter=1;
 	foreach ($PhraseArray as &$value) {
-		if(substr($value, 0, 4)!=='<br>')
+		if(mb_substr_count($value, "\n")>0)
 		{
-			$value="<br>${sentenceCounter}.".$value;
+		    $startPoint=strpos($value,"\n");
+            $value=substr_replace($value, "${sentenceCounter}.", $startPoint+2, 0);
+
 		}else{
-			$value=substr_replace($value, "<br>${sentenceCounter}.", 0, 4);
+            $value="\n${sentenceCounter}.".$value;
 		}
 		$sentenceCounter++;
 	}
