@@ -27,4 +27,9 @@ class Cell
     {
         return $this->cellState;
     }
+
+    public function setCellState(int $state)
+    {
+        $this->cellState=$state;
+    }
 }

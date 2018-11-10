@@ -13,7 +13,7 @@ class Helper
         require_once("../code/task6/prepareUI.php");
     }
 
-    public static function convertFieldMarksToString(string $fieldKeysString, array $fieldArray): string
+    public static function convertFieldArrayToString(string $fieldKeysString, array $fieldArray): string
     {
         for ($i = 1; $i <= 10; $i++) {
             for ($j = 1; $j <= 10; $j++) {
@@ -25,6 +25,23 @@ class Helper
         }
 
         return trim($fieldKeysString);
+    }
+
+    public static function convertStringToFieldArray(string $fieldKeysString): array
+    {
+        $initialKeysArray=explode(" ",$fieldKeysString);
+        $newKeysArray=array();
+        foreach ($initialKeysArray as &$value)
+        {
+            $newKeysArray[]=explode("-",$value);
+        }
+
+        return $newKeysArray;
+    }
+
+    public static function showGameView()
+    {
+        require_once("../code/task6/gameUI.php");
     }
 
 }

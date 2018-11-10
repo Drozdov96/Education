@@ -11,10 +11,16 @@
 
 class Application
 {
+    private $game;
+
+    public function runPreparePhase()
+    {
+        Helper::showPrepareView();
+    }
+
     public function run()
     {
-        $field= new Field();
-
-        Helper::showPrepareView();
+        $game=new Game();
+        Helper::showGameView();
     }
 }

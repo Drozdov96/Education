@@ -5,10 +5,10 @@ if(isset($_POST['submit_btn']))
 {
     if(empty($_POST['player_one']))
     {
-        $fieldKeysString=Helper::convertFieldMarksToString($fieldKeysString, $_POST);
+        $fieldKeysString=Helper::convertFieldArrayToString($fieldKeysString, $_POST);
     }else{
         $_SESSION['player_one_field'] = $_POST['player_one'];
-        $_SESSION['player_two_field'] = Helper::convertFieldMarksToString($fieldKeysString, $_POST);
+        $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($fieldKeysString, $_POST);
 
         header("Refresh:0; url=index.php");
         exit;

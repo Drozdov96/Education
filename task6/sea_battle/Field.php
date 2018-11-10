@@ -25,4 +25,13 @@ class Field
             }
         }
     }
+
+    public function fillWithShips(array $ships)
+    {
+        foreach ($ships as $value)
+        {
+            $this->cellsArray[$value[0]][$value[1]]->setState(1);
+        }
+    }
+
 }
