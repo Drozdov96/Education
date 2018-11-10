@@ -15,5 +15,6 @@ class Application
     {
         $field= new Field();
 
+        showPrepareView();
     }
 }
