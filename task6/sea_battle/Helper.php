@@ -10,7 +10,7 @@ class Helper
 {
     public static function showPrepareView()
     {
-        include_once ("../task6/prepareUI.php");
+        require_once("../code/task6/prepareUI.php");
     }
 
 }

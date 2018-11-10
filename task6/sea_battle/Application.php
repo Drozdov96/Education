@@ -15,6 +15,6 @@ class Application
     {
         $field= new Field();
 
-        showPrepareView();
+        Helper::showPrepareView();
     }
 }
