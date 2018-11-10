@@ -24,7 +24,7 @@ class Helper
             }
         }
 
-        return $fieldKeysString;
+        return trim($fieldKeysString);
     }
 
 }

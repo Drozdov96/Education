@@ -7,10 +7,11 @@ if(isset($_POST['submit_btn']))
     {
         $fieldKeysString=Helper::convertFieldMarksToString($fieldKeysString, $_POST);
     }else{
-        session_start();
         $_SESSION['player_one_field'] = $_POST['player_one'];
-
         $_SESSION['player_two_field'] = Helper::convertFieldMarksToString($fieldKeysString, $_POST);
+
+        header("Refresh:0; url=index.php");
+        exit;
     }
 }
 
