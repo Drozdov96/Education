@@ -6,7 +6,7 @@
  * Time: 10:46
  */
 
-namespace sea_battle;
+//namespace sea_battle;
 
 
 class Application
@@ -14,6 +14,6 @@ class Application
     public function run()
     {
         $field= new Field();
-        var_dump($field);
+
     }
 }

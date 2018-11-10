@@ -6,7 +6,7 @@
  * Time: 10:57
  */
 
-namespace sea_battle;
+//namespace sea_battle;
 
 
 class Field
@@ -15,13 +15,13 @@ class Field
 
     public function __construct()
     {
-        $cellsArray=array();
+        $this->cellsArray=array();
 
         for($i=1;$i<=10;$i++)
         {
             for($j=1;$j<=10;$j++)
             {
-                $cellsArray[$i][$j]=new Cell();
+                $this->cellsArray[$i][$j]=new Cell();
             }
         }
     }

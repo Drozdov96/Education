@@ -1,7 +1,7 @@
 <?php
 
-namespace sea_battle;
+//use sea_battle\Application;
 
-$app= new Application();
+$app= new Application;
 
 $app->run();

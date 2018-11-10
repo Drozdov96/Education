@@ -6,7 +6,7 @@
  * Time: 11:01
  */
 
-namespace sea_battle;
+//namespace sea_battle;
 
 
 class Cell
@@ -20,6 +20,11 @@ class Cell
 
     public function __construct()
     {
-        $cellState=0;
+        $this->cellState=0;
+    }
+
+    public function getCellState(): int
+    {
+        return $this->cellState;
     }
 }
