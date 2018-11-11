@@ -6,12 +6,20 @@ session_start();
 
 //use sea_battle\Application;
 
-$app= new Application;
+if(!isset($app))
+    $app= new Application;
 
-if(empty($_SESSION['player_one_field']) && empty($_SESSION['player_two_field']))
+if(!empty($_GET['x']) && !empty($_GET['y']))
 {
-    $app->runPreparePhase();
+    $app->addStep($_GET['x'], $_GET['y']);
+    Helper::showGameView();
 }else{
-    echo "1";
-    $app->run();
+    if(empty($_SESSION['player_one_field']) && empty($_SESSION['player_two_field']))
+    {
+        $app->runPreparePhase();
+    }else{
+        echo "1";
+        $app->run();
+    }
 }
+

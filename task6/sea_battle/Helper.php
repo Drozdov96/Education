@@ -42,7 +42,6 @@ class Helper
     public static function showGameView()
     {
         require_once("../code/task6/gameUI.php");
-        return $_GET['x'].$_GET['y'];
     }
 
 }

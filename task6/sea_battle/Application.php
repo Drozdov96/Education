@@ -20,7 +20,12 @@ class Application
 
     public function run()
     {
-        $game=new Game();
-        var_dump(Helper::showGameView());
+        $this->game=new Game();
+        Helper::showGameView();
+    }
+
+    public function addStep(string $x, string $y)
+    {
+        $this->game->addStep($x, $y);
     }
 }

@@ -23,4 +23,14 @@ class Game
         $keysArray=Helper::convertStringToFieldArray($_SESSION['player_two_field']);
         $this->initialFieldTwo->fillWithShips($keysArray);
     }
+
+    public function addStep(string $x, string $y)
+    {
+        $step=[
+            'x'=>$x,
+            'y'=>$y
+        ];
+        array_push($this->steps, $step);
+        var_dump($this->steps);
+    }
 }
