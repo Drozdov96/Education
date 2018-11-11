@@ -30,7 +30,7 @@ class Field
     {
         foreach ($ships as $value)
         {
-            $this->cellsArray[$value[0]][$value[1]]->setState(1);
+            $this->cellsArray[$value[0]][$value[1]]->setCellState(1);
         }
     }
 
