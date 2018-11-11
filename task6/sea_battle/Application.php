@@ -21,6 +21,6 @@ class Application
     public function run()
     {
         $game=new Game();
-        Helper::showGameView();
+        var_dump(Helper::showGameView());
     }
 }
