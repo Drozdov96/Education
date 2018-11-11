@@ -1,5 +1,9 @@
 <?php
 
+if(!empty($_GET['x']) && !empty($_GET['y']))
+{
+    return $_GET['x'].$_GET['y'];
+}
 
 echo "<!DOCTYPE html>
               <html>
@@ -14,7 +18,7 @@ for ($i = 1; $i <= 10; $i++)
 {
     for ($j = 1; $j <= 10; $j++)
     {
-        echo "<a href=\"sea_battle/controller.php?x=${i}&y=${j}\" > </a>";
+        echo "<a href=\"?x=${i}&y=${j}\" > </a>";
     }
     echo "<br>";
 }
