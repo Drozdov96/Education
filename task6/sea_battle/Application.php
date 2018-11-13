@@ -18,14 +18,27 @@ class Application
         Helper::showPrepareView();
     }
 
-    public function run()
+    public function runGame(string $fieldOne, string $fieldTwo)
     {
-        $this->game=new Game();
+        $this->game=new Game($fieldOne, $fieldTwo);
+        $_SESSION['currentPlayerNum']=0;
+        $_SESSION['app']=$this;
         Helper::showGameView();
     }
 
-    public function addStep(string $x, string $y)
+    public function doStep(string $x, string $y,  int $currentPlayerNum)
     {
-        $this->game->addStep($x, $y);
+        //Доработать вывод, функция возвращает текущего игрока.
+        $this->game->doStep($x, $y, $currentPlayerNum);
+    }
+
+    public function getPlayerFieldOne()
+    {
+        return $this->game->getFieldOne();
+    }
+
+    public function getPlayerFieldTwo()
+    {
+        return $this->game->getFieldTwo();
     }
 }

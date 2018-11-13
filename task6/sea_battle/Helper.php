@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Flatty
- * Date: 10.11.2018
- * Time: 12:21
- */
 
 class Helper
 {
@@ -42,6 +36,40 @@ class Helper
     public static function showGameView()
     {
         require_once("../code/task6/gameUI.php");
+    }
+
+    /*
+     * Enemy html classes:
+     * hide= invisible node
+     * show= visible node
+     */
+    public static function addEnemyClass(int $x, int $y, array $field)
+    {
+        if($field[$x][$y]===2 || $field[$x][$y]===3){
+            return "show";
+        }else{
+            return "hide";
+        }
+    }
+
+    /*
+     * Enemy html classes:
+     * hide= invisible node
+     * show= visible node
+     */
+    public static function addFriendlyClass(int $x, int $y, array $field)
+    {
+        switch ($field[$x][$y]){
+            case 0: return "empty";
+                break;
+            case 1: return "ship";
+                break;
+            case 2: return "breakShip";
+                break;
+            case 3: return "miss";
+                break;
+            default: return "";
+        }
     }
 
 }

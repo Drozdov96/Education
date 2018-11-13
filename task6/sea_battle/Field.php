@@ -30,8 +30,16 @@ class Field
     {
         foreach ($ships as $value)
         {
-            $this->cellsArray[$value[0]][$value[1]]->setCellState(1);
+            $this->cellsArray[$value[0]][$value[1]]->cellState=1;
         }
     }
 
+    public function setCellState(int $x, int $y, int $state)
+    {
+        $this->cellsArray[$x][$y]->cellState=$state;
+    }
+
+    public function getCellState(int $x, int $y){
+        return $this->cellsArray[$x][$y]->cellState;
+    }
 }

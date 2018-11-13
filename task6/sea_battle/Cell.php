@@ -14,22 +14,12 @@ class Cell
     /*
      * Состояние клетки поля показывает её числовое значение:
      * 0 = пустая клетка; 1 = клетка с кораблем или палубой корабля;
-     * 2 = подбитый корабль или палуба; 4 = подбитая пустая клетка;
+     * 2 = подбитый корабль или палуба; 3 = подбитая пустая клетка;
      */
-    private $cellState;
+    public $cellState;
 
     public function __construct()
     {
         $this->cellState=0;
-    }
-
-    public function getCellState(): int
-    {
-        return $this->cellState;
-    }
-
-    public function setCellState(int $state)
-    {
-        $this->cellState=$state;
     }
 }

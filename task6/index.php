@@ -11,24 +11,22 @@ function autoload($class)
 
 session_start();
 
-//use sea_battle\Application;
 
-if(!isset($app))
-{
+if(empty($_SESSION['app'])) {
+   $app=$_SESSION['app'];
+}else{
     $app= new Application;
 }
-
-if(!empty($_GET['x']) && !empty($_GET['y']))
+if(!empty($_GET['x']) && !empty($_GET['y'])){
+    $app->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
+    unset($_GET['x'], $_GET['y']);
+}elseif(empty($_SESSION['player_one_field']) || empty($_SESSION['player_two_field']))
 {
-    $app->addStep($_GET['x'], $_GET['y']);
-    Helper::showGameView();
+    $app->runPreparePhase();
 }else{
-    if(empty($_SESSION['player_one_field']) && empty($_SESSION['player_two_field']))
-    {
-        $app->runPreparePhase();
-    }else{
-        echo "1";
-        $app->run();
-    }
+    echo "1";
+    $app->runGame($_SESSION['player_one_field'], $_SESSION['player_two_field']);
+    unset($_SESSION['player_one_field'],$_SESSION['player_two_field']);
 }
+
 
