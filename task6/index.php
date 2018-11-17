@@ -12,11 +12,14 @@ function autoload($class)
 session_start();
 
 
-if(empty($_SESSION['app'])) {
+if(!empty($_SESSION['app'])) {
+
    $app=$_SESSION['app'];
 }else{
+    echo "app";
     $app= new Application;
 }
+
 if(!empty($_GET['x']) && !empty($_GET['y'])){
     $app->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
     unset($_GET['x'], $_GET['y']);
@@ -24,7 +27,6 @@ if(!empty($_GET['x']) && !empty($_GET['y'])){
 {
     $app->runPreparePhase();
 }else{
-    echo "1";
     $app->runGame($_SESSION['player_one_field'], $_SESSION['player_two_field']);
     unset($_SESSION['player_one_field'],$_SESSION['player_two_field']);
 }

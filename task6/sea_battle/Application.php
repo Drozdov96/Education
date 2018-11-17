@@ -23,6 +23,7 @@ class Application
         $this->game=new Game($fieldOne, $fieldTwo);
         $_SESSION['currentPlayerNum']=0;
         $_SESSION['app']=$this;
+        echo $_SESSION['currentPlayerNum']=0;
         Helper::showGameView();
     }
 

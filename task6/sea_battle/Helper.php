@@ -43,12 +43,12 @@ class Helper
      * hide= invisible node
      * show= visible node
      */
-    public static function addEnemyClass(int $x, int $y, array $field)
+    public static function addEnemyClass(int $x, int $y, Field $field)
     {
-        switch ($field[$x][$y]){
+        switch ($field->getCellState($x, $y)){
             case 2: return "breakShipCell";
                 break;
-            case 3: return "showEmptyCell";
+            case 3: return "EmptyCell";
                 break;
             default: return "hide";
         }
@@ -59,9 +59,9 @@ class Helper
      * hide= invisible node
      * show= visible node
      */
-    public static function addFriendlyClass(int $x, int $y, array $field)
+    public static function addFriendlyClass(int $x, int $y, Field $field)
     {
-        switch ($field[$x][$y]){
+        switch ($field->getCellState($x, $y)){
             case 0: return "empty";
                 break;
             case 1: return "ship";

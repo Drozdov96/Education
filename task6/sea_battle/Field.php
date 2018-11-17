@@ -11,7 +11,7 @@
 
 class Field
 {
-    private $cellsArray;
+    public $cellsArray;
 
     public function __construct()
     {
