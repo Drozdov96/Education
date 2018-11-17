@@ -26,7 +26,6 @@ class Game
 
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
-        echo "do";
         $step=[
             'x'=>$x,
             'y'=>$y,

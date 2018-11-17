@@ -48,7 +48,7 @@ class Helper
         switch ($field->getCellState($x, $y)){
             case 2: return "breakShipCell";
                 break;
-            case 3: return "EmptyCell";
+            case 3: return "emptyCell";
                 break;
             default: return "hide";
         }
@@ -62,11 +62,11 @@ class Helper
     public static function addFriendlyClass(int $x, int $y, Field $field)
     {
         switch ($field->getCellState($x, $y)){
-            case 0: return "empty";
+            case 0: return "emptyCell";
                 break;
             case 1: return "ship";
                 break;
-            case 2: return "breakShip";
+            case 2: return "breakShipCell";
                 break;
             case 3: return "miss";
                 break;

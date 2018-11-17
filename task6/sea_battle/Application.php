@@ -28,10 +28,8 @@ class Application
 
     public function doStep(string $x, string $y,  int $currentPlayerNum)
     {
-        echo "step2";
         //Доработать вывод, функция возвращает текущего игрока.
         $_SESSION['currentPlayerNum']=$this->game->doStep($x, $y, $currentPlayerNum);
-        echo $_SESSION['currentPlayerNum'];
         $_SESSION['app']=$this;
         Helper::showGameView();
     }
