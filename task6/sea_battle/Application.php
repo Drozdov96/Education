@@ -23,14 +23,17 @@ class Application
         $this->game=new Game($fieldOne, $fieldTwo);
         $_SESSION['currentPlayerNum']=0;
         $_SESSION['app']=$this;
-        echo $_SESSION['currentPlayerNum']=0;
         Helper::showGameView();
     }
 
     public function doStep(string $x, string $y,  int $currentPlayerNum)
     {
+        echo "step2";
         //Доработать вывод, функция возвращает текущего игрока.
-        $this->game->doStep($x, $y, $currentPlayerNum);
+        $_SESSION['currentPlayerNum']=$this->game->doStep($x, $y, $currentPlayerNum);
+        echo $_SESSION['currentPlayerNum'];
+        $_SESSION['app']=$this;
+        Helper::showGameView();
     }
 
     public function getPlayerFieldOne()

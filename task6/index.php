@@ -21,6 +21,7 @@ if(!empty($_SESSION['app'])) {
 }
 
 if(!empty($_GET['x']) && !empty($_GET['y'])){
+    echo "step";
     $app->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
     unset($_GET['x'], $_GET['y']);
 }elseif(empty($_SESSION['player_one_field']) || empty($_SESSION['player_two_field']))

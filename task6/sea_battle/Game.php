@@ -26,6 +26,7 @@ class Game
 
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
+        echo "do";
         $step=[
             'x'=>$x,
             'y'=>$y,
@@ -34,7 +35,7 @@ class Game
         array_push($this->steps, $step);
 
         if($currentPlayerNum===0){
-            switch($this->FieldTwo->getCellState()) {
+            switch($this->FieldTwo->getCellState((int)$x,(int)$y)) {
                 case 0: $this->FieldTwo->setCellState((int)$x,(int)$y, 3);
                     $currentPlayerNum=1;
                     break;
@@ -42,7 +43,7 @@ class Game
                     break;
             }
         }else{
-            switch($this->FieldOne->getCellState()) {
+            switch($this->FieldOne->getCellState((int)$x,(int)$y)) {
                 case 0: $this->FieldOne->setCellState((int)$x,(int)$y, 3);
                     $currentPlayerNum=0;
                     break;

@@ -46,6 +46,18 @@ echo "<style>
         }
         
         a{
+            display: block;
             text-decoration: none;
+            width: 20px;
+            heigth: 20px;
+        }
+        
+        td{
+            width: 20px;
+            heigth: 20px;
+        }
+        
+        tr{
+            height: 20px;
         }
       </style>";
