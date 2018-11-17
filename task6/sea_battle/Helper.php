@@ -45,10 +45,12 @@ class Helper
      */
     public static function addEnemyClass(int $x, int $y, array $field)
     {
-        if($field[$x][$y]===2 || $field[$x][$y]===3){
-            return "show";
-        }else{
-            return "hide";
+        switch ($field[$x][$y]){
+            case 2: return "breakShipCell";
+                break;
+            case 3: return "showEmptyCell";
+                break;
+            default: return "hide";
         }
     }
 
