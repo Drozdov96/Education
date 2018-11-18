@@ -12,6 +12,7 @@ if($currentPlayer===0){
     $friendlyField=Helper::loadFieldTwoFromFile();
     $enemyField=Helper::loadFieldOneFromFile();
 }
+//var_dump($enemyField);
 echo "<!DOCTYPE html>
               <html>
                 <head>  

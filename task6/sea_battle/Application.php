@@ -23,8 +23,8 @@ class Application
         $this->game=new Game($fieldOne, $fieldTwo);
         $_SESSION['currentPlayerNum']=0;
         $this->game->saveFieldsToFile();
-        //$_SESSION['app']=$this;
-        //Helper::showGameView();
+        $_SESSION['app']=$this;
+        Helper::showGameView();
     }
 
     public function doStep(string $x, string $y,  int $currentPlayerNum)
@@ -33,7 +33,7 @@ class Application
         $_SESSION['currentPlayerNum']=$this->game->
         doStep($x, $y, $currentPlayerNum);
         $this->game->saveFieldsToFile();
-        //$_SESSION['app']=$this;
+        $_SESSION['app']=$this;
         Helper::showGameView();
     }
 

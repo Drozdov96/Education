@@ -65,13 +65,14 @@ class Game
 
     public function saveFieldsToFile()
     {
+        echo "save";
         $json=$this->FieldOne->convertCellsArrayToJson();
-        $fileOne=fopen("/task6/sea_battle/files/field_one.txt","w");
+        $fileOne=fopen("./task6/sea_battle/files/field_one.txt","w");
         fwrite($fileOne, $json);
         fclose($fileOne);
 
         $json=$this->FieldTwo->convertCellsArrayToJson();
-        $fileTwo=fopen("/task6/sea_battle/files/field_two.txt","w");
+        $fileTwo=fopen("./task6/sea_battle/files/field_two.txt","w");
         fwrite($fileTwo, $json);
         fclose($fileTwo);
     }
