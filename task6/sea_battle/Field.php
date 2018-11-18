@@ -42,4 +42,12 @@ class Field
     public function getCellState(int $x, int $y){
         return $this->cellsArray[$x][$y]->cellState;
     }
+
+    public function convertCellsArrayToJson() : string
+    {
+        $json=json_encode($this->cellsArray);
+        $arr=json_decode($json);
+        var_dump($arr->{1}->{1});
+        return json_encode($this->cellsArray);
+    }
 }

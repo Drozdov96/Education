@@ -23,7 +23,7 @@ class Application
         $this->game=new Game($fieldOne, $fieldTwo);
         $_SESSION['currentPlayerNum']=0;
         $_SESSION['app']=$this;
-        Helper::showGameView();
+        //Helper::showGameView();
     }
 
     public function doStep(string $x, string $y,  int $currentPlayerNum)

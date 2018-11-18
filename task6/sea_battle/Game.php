@@ -18,6 +18,7 @@ class Game
         $this->FieldOne=new Field();
         $keysArray=Helper::convertStringToFieldArray($fieldOne);
         $this->FieldOne->fillWithShips($keysArray);
+        $this->FieldOne->convertCellsArrayToJson();
 
         $this->FieldTwo=new Field();
         $keysArray=Helper::convertStringToFieldArray($fieldTwo);
