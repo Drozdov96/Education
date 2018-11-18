@@ -18,7 +18,6 @@ class Game
         $this->FieldOne=new Field();
         $keysArray=Helper::convertStringToFieldArray($fieldOne);
         $this->FieldOne->fillWithShips($keysArray);
-        $this->FieldOne->convertCellsArrayToJson();
 
         $this->FieldTwo=new Field();
         $keysArray=Helper::convertStringToFieldArray($fieldTwo);
@@ -62,5 +61,18 @@ class Game
     public function getFieldTwo()
     {
         return $this->FieldTwo;
+    }
+
+    public function saveFieldsToFile()
+    {
+        $json=$this->FieldOne->convertCellsArrayToJson();
+        $fileOne=fopen("/task6/sea_battle/files/field_one.txt","w");
+        fwrite($fileOne, $json);
+        fclose($fileOne);
+
+        $json=$this->FieldTwo->convertCellsArrayToJson();
+        $fileTwo=fopen("/task6/sea_battle/files/field_two.txt","w");
+        fwrite($fileTwo, $json);
+        fclose($fileTwo);
     }
 }

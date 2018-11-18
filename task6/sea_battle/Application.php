@@ -22,15 +22,18 @@ class Application
     {
         $this->game=new Game($fieldOne, $fieldTwo);
         $_SESSION['currentPlayerNum']=0;
-        $_SESSION['app']=$this;
+        $this->game->saveFieldsToFile();
+        //$_SESSION['app']=$this;
         //Helper::showGameView();
     }
 
     public function doStep(string $x, string $y,  int $currentPlayerNum)
     {
         //Доработать вывод, функция возвращает текущего игрока.
-        $_SESSION['currentPlayerNum']=$this->game->doStep($x, $y, $currentPlayerNum);
-        $_SESSION['app']=$this;
+        $_SESSION['currentPlayerNum']=$this->game->
+        doStep($x, $y, $currentPlayerNum);
+        $this->game->saveFieldsToFile();
+        //$_SESSION['app']=$this;
         Helper::showGameView();
     }
 

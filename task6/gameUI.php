@@ -2,11 +2,15 @@
 
 $currentPlayer=$_SESSION['currentPlayerNum'];
 if($currentPlayer===0){
-    $friendlyField=$_SESSION['app']->getPlayerFieldOne();
-    $enemyField=$_SESSION['app']->getPlayerFieldTwo();
+//    $friendlyField=$_SESSION['app']->getPlayerFieldOne();
+//    $enemyField=$_SESSION['app']->getPlayerFieldTwo();
+    $friendlyField=Helper::loadFieldOneFromFile();
+    $enemyField=Helper::loadFieldTwoFromFile();
 }else{
-    $friendlyField=$_SESSION['app']->getPlayerFieldTwo();
-    $enemyField=$_SESSION['app']->getPlayerFieldOne();
+//    $friendlyField=$_SESSION['app']->getPlayerFieldTwo();
+//    $enemyField=$_SESSION['app']->getPlayerFieldOne();
+    $friendlyField=Helper::loadFieldTwoFromFile();
+    $enemyField=Helper::loadFieldOneFromFile();
 }
 echo "<!DOCTYPE html>
               <html>
@@ -25,7 +29,7 @@ for ($i = 1; $i <= 10; $i++)
     for ($j = 1; $j <= 10; $j++)
     {
         echo "<td><a href=\"index.php?x=${i}&y=${j}\" class='".
-            Helper::addEnemyClass($i, $j, $enemyField)."'>&nbsp;</a></td>";
+            Helper::getEnemyClass($i, $j, $enemyField)."'>&nbsp;</a></td>";
     }
     echo "</tr>";
 }
@@ -39,7 +43,7 @@ for ($i = 1; $i <= 10; $i++)
     echo "<tr>";
     for ($j = 1; $j <= 10; $j++)
     {
-        echo "<td class='".Helper::addFriendlyClass($i, $j, $friendlyField)."'>&nbsp;</td>";
+        echo "<td class='".Helper::getFriendlyClass($i, $j, $friendlyField)."'>&nbsp;</td>";
     }
     echo "</tr>";
 }

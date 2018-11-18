@@ -43,9 +43,9 @@ class Helper
      * hide= invisible node
      * show= visible node
      */
-    public static function addEnemyClass(int $x, int $y, Field $field)
+    public static function getEnemyClass(int $x, int $y, StdClass $field)
     {
-        switch ($field->getCellState($x, $y)){
+        switch ($field->{$x}->{$y}->cellState){
             case 2: return "breakShipCell";
                 break;
             case 3: return "emptyCell";
@@ -59,9 +59,9 @@ class Helper
      * hide= invisible node
      * show= visible node
      */
-    public static function addFriendlyClass(int $x, int $y, Field $field)
+    public static function getFriendlyClass(int $x, int $y, StdClass $field)
     {
-        switch ($field->getCellState($x, $y)){
+        switch ($field->{$x}->{$y}->cellState){
             case 0: return "emptyCell";
                 break;
             case 1: return "ship";
@@ -72,6 +72,18 @@ class Helper
                 break;
             default: return "";
         }
+    }
+
+    public static function loadFieldOneFromFile(){
+        $file=fopen("/task6/sea_battle/files/field_one.txt","r");
+        return json_decode(fread($file,
+            filesize("/task6/sea_battle/files/field_one.txt")));
+    }
+
+    public static function loadFieldTwoFromFile(){
+        $file=fopen("/task6/sea_battle/files/field_two.txt","r");
+        return json_decode(fread($file,
+            filesize("/task6/sea_battle/files/field_two.txt")));
     }
 
 }
