@@ -76,14 +76,18 @@ class Helper
 
     public static function loadFieldOneFromFile(){
         $file=fopen("/task6/sea_battle/files/field_one.txt","r");
-        return json_decode(fread($file,
+        $result=json_decode(fread($file,
             filesize("/task6/sea_battle/files/field_one.txt")));
+        fclose($file);
+        return $result;
     }
 
     public static function loadFieldTwoFromFile(){
         $file=fopen("/task6/sea_battle/files/field_two.txt","r");
-        return json_decode(fread($file,
+        $result=json_decode(fread($file,
             filesize("/task6/sea_battle/files/field_two.txt")));
+        fclose($file);
+        return $result;
     }
 
 }
