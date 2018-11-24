@@ -2,8 +2,7 @@
 
 class Controller
 {
-
-    public function doRoute(string $state)
+    public function doRoute()
     {
         if(!empty($_SESSION['app'])) {
 
@@ -12,7 +11,7 @@ class Controller
             $app= new Application;
         }
 
-        switch ($state){
+        switch ($_GET['state']){
             case 'preparePhase':
                 $app->runPreparePhase();
                 break;
@@ -24,6 +23,8 @@ class Controller
                 $app->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
                 unset($_GET['x'], $_GET['y']);
                 break;
+            default:
+                $app->runPreparePhase();
         }
     }
 }

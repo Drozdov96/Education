@@ -12,7 +12,7 @@ function autoload($class)
 session_start();
 
 $controller=new Controller();
-$controller->doRoute($_GET['state']);
+$controller->doRoute();
 
 
 

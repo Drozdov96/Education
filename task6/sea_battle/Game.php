@@ -65,7 +65,6 @@ class Game
 
     public function saveFieldsToFile()
     {
-        echo "save";
         $json=$this->FieldOne->convertCellsArrayToJson();
         $fileOne=fopen("./task6/sea_battle/files/field_one.txt","w");
         fwrite($fileOne, $json);
