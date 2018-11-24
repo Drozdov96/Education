@@ -10,7 +10,7 @@ if(isset($_POST['submit_btn']))
         $_SESSION['player_one_field'] = $_POST['player_one'];
         $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($fieldKeysString, $_POST);
 
-        header("Refresh:0; url=index.php");
+        header("Refresh:0; url=index.php?state=startGame");
         exit;
     }
 }
@@ -24,7 +24,7 @@ echo "<!DOCTYPE html>
                 <body style=\"min-width: 1000px;\">
                 <h1>Place ships on the field!</h1>
                     <div style='width: 220px'>
-                     <form name='play-field' action method=\"post\">";
+                     <form name='play-field' action=\"?state=preparePhase\" method=\"post\">";
 for ($i = 1; $i <= 10; $i++)
 {
     for ($j = 1; $j <= 10; $j++)

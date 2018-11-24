@@ -29,7 +29,7 @@ for ($i = 1; $i <= 10; $i++)
     echo "<tr>";
     for ($j = 1; $j <= 10; $j++)
     {
-        echo "<td><a href=\"index.php?x=${i}&y=${j}\" class='".
+        echo "<td><a href=\"index.php?x=${i}&y=${j}&state=doStep\" class='".
             Helper::getEnemyClass($i, $j, $enemyField)."'>&nbsp;</a></td>";
     }
     echo "</tr>";

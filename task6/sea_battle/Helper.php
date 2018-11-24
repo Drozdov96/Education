@@ -40,8 +40,9 @@ class Helper
 
     /*
      * Enemy html classes:
+     * breakShipCell= visible node with ship
      * hide= invisible node
-     * show= visible node
+     * emptyCell= visible node without ship
      */
     public static function getEnemyClass(int $x, int $y, StdClass $field)
     {
@@ -54,11 +55,6 @@ class Helper
         }
     }
 
-    /*
-     * Enemy html classes:
-     * hide= invisible node
-     * show= visible node
-     */
     public static function getFriendlyClass(int $x, int $y, StdClass $field)
     {
         switch ($field->{$x}->{$y}->cellState){

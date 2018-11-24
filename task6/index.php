@@ -11,23 +11,8 @@ function autoload($class)
 
 session_start();
 
+$controller=new Controller();
+$controller->doRoute($_GET['state']);
 
-if(!empty($_SESSION['app'])) {
-
-   $app=$_SESSION['app'];
-}else{
-    $app= new Application;
-}
-
-if(!empty($_GET['x']) && !empty($_GET['y'])){
-    $app->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
-    unset($_GET['x'], $_GET['y']);
-}elseif(empty($_SESSION['player_one_field']) || empty($_SESSION['player_two_field']))
-{
-    $app->runPreparePhase();
-}else{
-    $app->runGame($_SESSION['player_one_field'], $_SESSION['player_two_field']);
-    unset($_SESSION['player_one_field'],$_SESSION['player_two_field']);
-}
 
 
