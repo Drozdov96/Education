@@ -41,18 +41,18 @@ class Game
 
         if($currentPlayerNum===0){
             switch($this->FieldTwo->getCellState((int)$x,(int)$y)) {
-                case 0: $this->FieldTwo->setCellState((int)$x,(int)$y, 3);
+                case 'empty': $this->FieldTwo->setCellState((int)$x,(int)$y, 'miss');
                     $currentPlayerNum=1;
                     break;
-                case 1: $this->FieldTwo->setCellState((int)$x,(int)$y, 2);
+                case 'ship': $this->FieldTwo->setCellState((int)$x,(int)$y, 'hit');
                     break;
             }
         }else{
             switch($this->FieldOne->getCellState((int)$x,(int)$y)) {
-                case 0: $this->FieldOne->setCellState((int)$x,(int)$y, 3);
+                case 'empty': $this->FieldOne->setCellState((int)$x,(int)$y, 'miss');
                     $currentPlayerNum=0;
                     break;
-                case 1: $this->FieldOne->setCellState((int)$x,(int)$y, 2);
+                case 'ship': $this->FieldOne->setCellState((int)$x,(int)$y, 'hit');
                     break;
             }
         }

@@ -45,29 +45,37 @@ class Helper
      * hide= invisible node
      * emptyCell= visible node without ship
      */
-    public static function getEnemyClass(int $x, int $y, StdClass $field)
+    public static function getEnemyClass(int $x, int $y, array $field): string
     {
-        switch ($field->{$x}->{$y}->cellState){
-            case 2: return "breakShipCell";
-                break;
-            case 3: return "emptyCell";
-                break;
-            default: return "hide";
+        foreach ($field as $value){
+            if($value->coordinateX===$x && $value->coordinateY===$y){
+                switch ($value->cellState){
+                    case 'hit': return "breakShipCell";
+                        break;
+                    case 'miss': return "emptyCell";
+                        break;
+                    default: return "hide";
+                }
+            }
         }
     }
 
-    public static function getFriendlyClass(int $x, int $y, StdClass $field)
+    public static function getFriendlyClass(int $x, int $y, array $field): string
     {
-        switch ($field->{$x}->{$y}->cellState){
-            case 0: return "emptyCell";
-                break;
-            case 1: return "ship";
-                break;
-            case 2: return "breakShipCell";
-                break;
-            case 3: return "miss";
-                break;
-            default: return "";
+        foreach ($field as $value){
+            if($value->coordinateX===$x && $value->coordinateY===$y){
+                switch ($value->cellState){
+                    case 'empty': return "emptyCell";
+                        break;
+                    case 'ship': return "ship";
+                        break;
+                    case 'hit': return "breakShipCell";
+                        break;
+                    case 'miss': return "miss";
+                        break;
+                    default: return "";
+                }
+            }
         }
     }
 

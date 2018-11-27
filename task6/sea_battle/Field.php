@@ -21,7 +21,7 @@ class Field
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[$i][$j]=new Cell();
+                $this->cellsArray[]=new Cell($i,$j);
             }
         }
     }
@@ -30,17 +30,32 @@ class Field
     {
         foreach ($ships as $value)
         {
-            $this->cellsArray[$value[0]][$value[1]]->cellState=1;
+            foreach ($this->cellsArray as &$cell){
+                reset($value);
+                if($cell->coordinateX===(int)current($value) &&
+                    $cell->coordinateY===(int)next($value)){
+                    $cell->cellState='ship';
+                }
+            }
         }
     }
 
-    public function setCellState(int $x, int $y, int $state)
+    public function setCellState(int $x, int $y, string $state)
     {
-        $this->cellsArray[$x][$y]->cellState=$state;
+        foreach ($this->cellsArray as &$cell){
+            if($cell->coordinateX===$x && $cell->coordinateY===$y){
+                $cell->cellState=$state;
+            }
+        }
     }
 
-    public function getCellState(int $x, int $y){
-        return $this->cellsArray[$x][$y]->cellState;
+    public function getCellState(int $x, int $y): string
+    {
+        foreach ($this->cellsArray as &$cell){
+            if($cell->coordinateX===$x && $cell->coordinateY===$y){
+                return $cell->cellState;
+            }
+        }
     }
 
     public function convertCellsArrayToJson() : string
