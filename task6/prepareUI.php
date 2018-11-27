@@ -1,14 +1,14 @@
 <?php
 
-$fieldKeysString="";
+$shipsOnFieldString="";
 if(isset($_POST['submit_btn']))
 {
     if(empty($_POST['player_one']))
     {
-        $fieldKeysString=Helper::convertFieldArrayToString($fieldKeysString, $_POST);
+        $shipsOnFieldString=Helper::convertFieldArrayToString($_POST);
     }else{
         $_SESSION['player_one_field'] = $_POST['player_one'];
-        $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($fieldKeysString, $_POST);
+        $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($_POST);
 
         header("Refresh:0; url=index.php?state=startGame");
         exit;
@@ -33,7 +33,7 @@ for ($i = 1; $i <= 10; $i++)
     }
     echo "<br>";
 }                   //нужно ли добавить условия проверки инициализации переменной
-echo "              <input type=\"hidden\" name=\"player_one\" value=\"".$fieldKeysString."\" >
+echo "              <input type=\"hidden\" name=\"player_one\" value=\"".$shipsOnFieldString."\" >
                     <input type=\"submit\" name=\"submit_btn\" value=\"Confirm\" >
                 </form>
                     </div>

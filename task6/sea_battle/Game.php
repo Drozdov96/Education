@@ -11,6 +11,8 @@ class Game
     protected $steps;
     protected $FieldOne;
     protected $FieldTwo;
+    public $playerOne;
+    public $playerTwo;
 
     public function __construct(string $fieldOne, string $fieldTwo)
     {
@@ -24,6 +26,10 @@ class Game
         $this->FieldTwo->fillWithShips($keysArray);
     }
 
+    /*
+     * Функция обрабатывает ход игрока, делает соответствующие изменения в полях и возвращает
+     * игрока, который будет делать следующий ход.
+     */
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
         $step=[
@@ -51,16 +57,6 @@ class Game
             }
         }
         return $currentPlayerNum;
-    }
-
-    public function getFieldOne()
-    {
-        return $this->FieldOne;
-    }
-
-    public function getFieldTwo()
-    {
-        return $this->FieldTwo;
     }
 
     public function saveFieldsToFile()

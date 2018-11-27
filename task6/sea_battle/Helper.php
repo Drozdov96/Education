@@ -7,18 +7,19 @@ class Helper
         require_once("../code/task6/prepareUI.php");
     }
 
-    public static function convertFieldArrayToString(string $fieldKeysString, array $fieldArray): string
+    public static function convertFieldArrayToString(array $fieldArray): string
     {
+        $fieldString="";
         for ($i = 1; $i <= 10; $i++) {
             for ($j = 1; $j <= 10; $j++) {
                 if(!empty($fieldArray["${i}-${j}"]))
                 {
-                    $fieldKeysString.=" ${i}-${j}";
+                    $fieldString.=" ${i}-${j}";
                 }
             }
         }
 
-        return trim($fieldKeysString);
+        return trim($fieldString);
     }
 
     public static function convertStringToFieldArray(string $fieldKeysString): array

@@ -11,8 +11,13 @@ function autoload($class)
 
 session_start();
 
-$controller=new Controller();
-$controller->doRoute();
+if(empty($_SESSION['app'])) {
+    $app= new Application;
+}else{
+    $app=$_SESSION['app'];
+}
+
+$app->doRoute($_GET['state']===null?"":$_GET['state']);
 
 
 

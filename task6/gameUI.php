@@ -2,13 +2,9 @@
 
 $currentPlayer=$_SESSION['currentPlayerNum'];
 if($currentPlayer===0){
-//    $friendlyField=$_SESSION['app']->getPlayerFieldOne();
-//    $enemyField=$_SESSION['app']->getPlayerFieldTwo();
     $friendlyField=Helper::loadFieldOneFromFile();
     $enemyField=Helper::loadFieldTwoFromFile();
 }else{
-//    $friendlyField=$_SESSION['app']->getPlayerFieldTwo();
-//    $enemyField=$_SESSION['app']->getPlayerFieldOne();
     $friendlyField=Helper::loadFieldTwoFromFile();
     $enemyField=Helper::loadFieldOneFromFile();
 }
@@ -35,8 +31,7 @@ for ($i = 1; $i <= 10; $i++)
     echo "</tr>";
 }
 echo "           </table>      
-                 </div>
-                 <div style='width: 220px'>
+                 </div><div style='width: 220px'>
                     <table>";
 //вывод таблицы игрока
 for ($i = 1; $i <= 10; $i++)

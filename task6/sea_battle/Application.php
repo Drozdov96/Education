@@ -37,13 +37,24 @@ class Application
         Helper::showGameView();
     }
 
-    public function getPlayerFieldOne()
+    //можно ли не ставить жесткую типизаци
+    public function doRoute(string $state)
     {
-        return $this->game->getFieldOne();
+        switch ($state){
+            case 'preparePhase':
+                $this->runPreparePhase();
+                break;
+            case 'startGame':
+                $this->runGame($_SESSION['player_one_field'], $_SESSION['player_two_field']);
+                unset($_SESSION['player_one_field'],$_SESSION['player_two_field']);
+                break;
+            case 'doStep':
+                $this->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
+                unset($_GET['x'], $_GET['y']);
+                break;
+            default:
+                $this->runPreparePhase();
+        }
     }
 
-    public function getPlayerFieldTwo()
-    {
-        return $this->game->getFieldTwo();
-    }
 }
