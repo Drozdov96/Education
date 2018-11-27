@@ -56,6 +56,7 @@ class Field
                 return $cell->cellState;
             }
         }
+        return "";
     }
 
     public function convertCellsArrayToJson() : string
