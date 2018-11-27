@@ -72,12 +72,12 @@ echo "<style>
             display: block;
             text-decoration: none;
             width: 20px;
-            heigth: 20px;
+            height: 20px;
         }
         
         td{
             width: 20px;
-            heigth: 20px;
+            height: 20px;
         }
         
         tr{
