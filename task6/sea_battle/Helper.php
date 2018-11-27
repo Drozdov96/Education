@@ -2,10 +2,10 @@
 
 class Helper
 {
-    public static function showPrepareView()
-    {
-        require_once("../code/task6/prepareUI.php");
-    }
+//    public static function showPrepareView()
+//    {
+//        require_once("../code/task6/prepareUI.php");
+//    }
 
     public static function convertFieldArrayToString(array $fieldArray): string
     {
@@ -34,10 +34,10 @@ class Helper
         return $newKeysArray;
     }
 
-    public static function showGameView()
-    {
-        require_once("../code/task6/gameUI.php");
-    }
+//    public static function showGameView()
+//    {
+//        require_once("../code/task6/gameUI.php");
+//    }
 
     /*
      * Enemy html classes:

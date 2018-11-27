@@ -14,7 +14,13 @@ class Game
     public $playerOne;
     public $playerTwo;
 
-    public function __construct(string $fieldOne, string $fieldTwo)
+    public function __construct(string $playerOne, string $playerTwo)
+    {
+        $this->playerOne=$playerOne;
+        $this->playerTwo=$playerTwo;
+    }
+
+    public function startGame(string $fieldOne, string $fieldTwo)
     {
         $this->steps=array();
         $this->FieldOne=new Field();
