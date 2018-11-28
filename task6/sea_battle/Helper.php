@@ -12,9 +12,9 @@ class Helper
         $fieldString="";
         for ($i = 1; $i <= 10; $i++) {
             for ($j = 1; $j <= 10; $j++) {
-                if(!empty($fieldArray["${i}-${j}"]))
+                if(!empty($fieldArray[(string)$i.'-'.(string)$j]))
                 {
-                    $fieldString.=" ${i}-${j}";
+                    $fieldString.=(string)$i.'-'.(string)$j;
                 }
             }
         }
@@ -58,6 +58,7 @@ class Helper
                 }
             }
         }
+        return "";
     }
 
     public static function getFriendlyClass(int $x, int $y, array $field): string
@@ -77,6 +78,7 @@ class Helper
                 }
             }
         }
+        return "";
     }
 
     public static function loadFieldOneFromFile(){
