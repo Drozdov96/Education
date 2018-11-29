@@ -56,7 +56,7 @@ class HtmlHelper
         {
             for ($j = 1; $j <= 10; $j++)
             {
-                $resultPageString.="<input type=\"checkbox\" name=\"${i}-${j}\" value='ship'>";
+                $resultPageString.="<input type=\"checkbox\" name=\"".(string)$i."-".(string)$j."\" value='ship'>";
             }
             $resultPageString.="<br>";
         }                   //нужно ли добавить условия проверки инициализации переменной
@@ -98,7 +98,7 @@ class HtmlHelper
             $resultPageString.="<tr>";
             for ($j = 1; $j <= 10; $j++)
             {
-                $resultPageString.="<td><a href=\"index.php?x=${i}&y=${j}&state=doStep\" class='".
+                $resultPageString.="<td><a href=\"index.php?x=".(string)$i."&y=".(string)$j."&state=doStep\" class='".
                     Helper::getEnemyClass($i, $j, $enemyField)."'>&nbsp;</a></td>";
             }
             $resultPageString.="</tr>";

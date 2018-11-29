@@ -26,8 +26,10 @@ class Field
         }
     }
 
-    public function fillWithShips(array $ships)
+    public function fillWithShips(string $fieldString)
     {
+        $ships=Helper::convertStringToFieldArray($fieldString);
+
         foreach ($ships as $value)
         {
             foreach ($this->cellsArray as &$cell){

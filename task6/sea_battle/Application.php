@@ -41,8 +41,6 @@ class Application
         $_SESSION['currentPlayerNum']=0;
         $this->game->saveFieldsToFile();
         $_SESSION['game']=$this->game;
-        var_dump($_SESSION['currentPlayerNum']===0?
-            $this->game->playerOne: $this->game->playerTwo);
         echo HtmlHelper::getGamePage($_SESSION['currentPlayerNum']===0?
             $this->game->playerOne: $this->game->playerTwo);
     }

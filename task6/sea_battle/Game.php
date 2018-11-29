@@ -24,12 +24,10 @@ class Game
     {
         $this->steps=array();
         $this->FieldOne=new Field();
-        $keysArray=Helper::convertStringToFieldArray($fieldOne);
-        $this->FieldOne->fillWithShips($keysArray);
+        $this->FieldOne->fillWithShips($fieldOne);
 
         $this->FieldTwo=new Field();
-        $keysArray=Helper::convertStringToFieldArray($fieldTwo);
-        $this->FieldTwo->fillWithShips($keysArray);
+        $this->FieldTwo->fillWithShips($fieldTwo);
     }
 
     /*

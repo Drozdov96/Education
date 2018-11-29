@@ -9,17 +9,17 @@ class Helper
 
     public static function convertFieldArrayToString(array $fieldArray): string
     {
-        $fieldString="";
+        $resultString="";
         for ($i = 1; $i <= 10; $i++) {
             for ($j = 1; $j <= 10; $j++) {
                 if(!empty($fieldArray[(string)$i.'-'.(string)$j]))
                 {
-                    $fieldString.=(string)$i.'-'.(string)$j;
+                    $resultString.=' '.(string)$i.'-'.(string)$j;
                 }
             }
         }
 
-        return trim($fieldString);
+        return trim($resultString);
     }
 
     public static function convertStringToFieldArray(string $fieldKeysString): array
