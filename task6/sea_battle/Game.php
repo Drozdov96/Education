@@ -9,8 +9,8 @@
 class Game
 {
     protected $steps;
-    protected $FieldOne;
-    protected $FieldTwo;
+    protected $fieldOne;
+    protected $fieldTwo;
     public $playerOne;
     public $playerTwo;
 
@@ -20,20 +20,40 @@ class Game
         $this->playerTwo=$playerTwo;
     }
 
-    public function startGame(string $fieldOne, string $fieldTwo)
+    public function startGame()
     {
         $this->steps=array();
-        $this->FieldOne=new Field();
-        $this->FieldOne->fillWithShips($fieldOne);
-
-        $this->FieldTwo=new Field();
-        $this->FieldTwo->fillWithShips($fieldTwo);
+//        $this->FieldOne=new Field();
+//        $this->FieldOne->fillWithShips($fieldOne);
+//
+//        $this->FieldTwo=new Field();
+//        $this->FieldTwo->fillWithShips($fieldTwo);
     }
 
-    /*
-     * Функция обрабатывает ход игрока, делает соответствующие изменения в полях и возвращает
-     * игрока, который будет делать следующий ход.
-     */
+    public function setField(int $fieldNum, string $field)
+    {
+        if($fieldNum===0){
+            $this->fieldOne=new Field();
+            $this->fieldOne->fillWithShips($field);
+        }else{
+            $this->fieldTwo=new Field();
+            $this->fieldTwo->fillWithShips($field);
+        }
+    }
+
+    public function fieldEmpty(int $fieldNum)
+    {
+        if($fieldNum===0){
+            return !empty($this->fieldOne);
+        }else{
+            return !empty($this->fieldTwo);
+        }
+    }
+
+        /*
+         * Функция обрабатывает ход игрока, делает соответствующие изменения в полях и возвращает
+         * игрока, который будет делать следующий ход.
+         */
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
         $step=[
@@ -44,19 +64,19 @@ class Game
         array_push($this->steps, $step);
 
         if($currentPlayerNum===0){
-            switch($this->FieldTwo->getCellState((int)$x,(int)$y)) {
-                case 'empty': $this->FieldTwo->setCellState((int)$x,(int)$y, 'miss');
+            switch($this->fieldTwo->getCellState((int)$x,(int)$y)) {
+                case 'empty': $this->fieldTwo->setCellState((int)$x,(int)$y, 'miss');
                     $currentPlayerNum=1;
                     break;
-                case 'ship': $this->FieldTwo->setCellState((int)$x,(int)$y, 'hit');
+                case 'ship': $this->fieldTwo->setCellState((int)$x,(int)$y, 'hit');
                     break;
             }
         }else{
-            switch($this->FieldOne->getCellState((int)$x,(int)$y)) {
-                case 'empty': $this->FieldOne->setCellState((int)$x,(int)$y, 'miss');
+            switch($this->fieldOne->getCellState((int)$x,(int)$y)) {
+                case 'empty': $this->fieldOne->setCellState((int)$x,(int)$y, 'miss');
                     $currentPlayerNum=0;
                     break;
-                case 'ship': $this->FieldOne->setCellState((int)$x,(int)$y, 'hit');
+                case 'ship': $this->fieldOne->setCellState((int)$x,(int)$y, 'hit');
                     break;
             }
         }
@@ -65,12 +85,12 @@ class Game
 
     public function saveFieldsToFile()
     {
-        $json=$this->FieldOne->convertCellsArrayToJson();
+        $json=$this->fieldOne->convertCellsArrayToJson();
         $fileOne=fopen("./task6/sea_battle/files/field_one.txt","w");
         fwrite($fileOne, $json);
         fclose($fileOne);
 
-        $json=$this->FieldTwo->convertCellsArrayToJson();
+        $json=$this->fieldTwo->convertCellsArrayToJson();
         $fileTwo=fopen("./task6/sea_battle/files/field_two.txt","w");
         fwrite($fileTwo, $json);
         fclose($fileTwo);

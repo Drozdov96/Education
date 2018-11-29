@@ -27,20 +27,20 @@ class HtmlHelper
 
     public static function getShipsPlacementPage(string $playerName): string
     {
-        $playerOneShipsString="";
-        if(isset($_POST['submit_btn_place']))
-        {
-            if(empty($_POST['player_one']))
-            {
-                $playerOneShipsString=Helper::convertFieldArrayToString($_POST);
-            }else{
-                $_SESSION['player_one_field'] = $_POST['player_one'];
-                $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($_POST);
-
-                header("Refresh:0; url=index.php?state=startGame");
-                exit;
-            }
-        }
+        //$playerOneShipsString="";
+//        if(isset($_POST['submit_btn_place']))
+//        {
+//            if(empty($_POST['player_one']))
+//            {
+//                $playerOneShipsString=Helper::convertFieldArrayToString($_POST);
+//            }else{
+//                $_SESSION['player_one_field'] = $_POST['player_one'];
+//                $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($_POST);
+//
+//                header("Refresh:0; url=index.php?state=startGame");
+//                exit;
+//            }
+//        }
 
         $resultPageString="<!DOCTYPE html>
               <html>
@@ -61,7 +61,7 @@ class HtmlHelper
             $resultPageString.="<br>";
         }                   //нужно ли добавить условия проверки инициализации переменной
         $resultPageString.="<input type=\"hidden\" name=\"player_one\" 
-            value='".$playerOneShipsString."'>
+            value=''>
                     <input type=\"submit\" name=\"submit_btn_place\" 
                         value=\"Confirm\" >
                 </form>

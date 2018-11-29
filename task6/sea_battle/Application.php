@@ -13,10 +13,36 @@ class Application
 {
     protected $game;
 
+    public function __construct($game)
+    {
+        //где лучше проверять на пустоту. уже в функции, или до того, как её дёрнуть
+        if(!empty($game)){
+            $this->game=$game;
+        }
+    }
+
     protected function runPlacementPhase()
     {
-        if(isset($_POST['submit_btn_place'])){
-            echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo);
+        if(isset($_POST['submit_btn_place'])) {
+            if(empty($this->game->fieldEmpty(0))) {
+                if (Helper::verifyInputFieldArray($_POST)){
+                    $this->game->setField(0, Helper::convertFieldArrayToString($_POST));
+                    $_SESSION['game']=$this->game;
+                    echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo);
+                }else{
+                    echo HtmlHelper::getShipsPlacementPage($this->game->playerOne);
+                }
+            }else{
+                if (Helper::verifyInputFieldArray($_POST)){
+                    $this->game->setField(1, Helper::convertFieldArrayToString($_POST));
+                    $_SESSION['game']=$this->game;
+
+                    header("Refresh:0; url=index.php?state=startGame");
+                    exit;
+                }else{
+                    echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo);
+                }
+            }
         }else{
             echo HtmlHelper::getShipsPlacementPage($this->game->playerOne);
         }
@@ -35,9 +61,9 @@ class Application
         echo HtmlHelper::getPlayersNamePage();
     }
 
-    protected function runGame(string $fieldOne, string $fieldTwo)
+    protected function runGame()
     {
-        $this->game->startGame($fieldOne, $fieldTwo);
+        $this->game->startGame();
         $_SESSION['currentPlayerNum']=0;
         $this->game->saveFieldsToFile();
         $_SESSION['game']=$this->game;
@@ -64,8 +90,7 @@ class Application
                 $this->runPlacementPhase();
                 break;
             case 'startGame':
-                $this->runGame($_SESSION['player_one_field'], $_SESSION['player_two_field']);
-                unset($_SESSION['player_one_field'],$_SESSION['player_two_field']);
+                $this->runGame();
                 break;
             case 'doStep':
                 $this->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
@@ -79,9 +104,9 @@ class Application
         }
     }
 
-    public function setGame(Game $game)
-    {
-        $this->game=$game;
-    }
+//    public function setGame(Game $game)
+//    {
+//        $this->game=$game;
+//    }
 
 }
