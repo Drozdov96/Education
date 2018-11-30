@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Flatty
- * Date: 10.11.2018
- * Time: 11:01
- */
 
 //namespace sea_battle;
 

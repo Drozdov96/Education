@@ -9,10 +9,11 @@ function autoload($class)
         include_once($file);
 }
 
-session_start();
-
-$app= new Application($_SESSION['game']);
-$app->doRoute($_GET['state']===null?"":$_GET['state']);
-
+//session_start();
+//
+//$app= new Application($_SESSION['game']);
+//$app->doRoute($_GET['state']===null?"":$_GET['state']);
+DatabaseHelper::getConnection();
+var_dump(DatabaseHelper::getPlayerIdFromDb("admin12"));
 
 

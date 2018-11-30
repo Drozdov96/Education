@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Flatty
- * Date: 10.11.2018
- * Time: 19:33
- */
 
 class Game
 {
