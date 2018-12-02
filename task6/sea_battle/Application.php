@@ -21,16 +21,17 @@ class Application
         }
     }
 
+    //TODO maybe refactor this
     protected function runPlacementPhase()
     {
         if(isset($_POST['submit_btn_place'])) {
-            if(empty($this->game->fieldEmpty(0))) {
+            if($this->game->fieldEmpty(0)) {
                 if (Helper::verifyInputFieldArray($_POST)){
                     $this->game->setField(0, Helper::convertFieldArrayToString($_POST));
                     $_SESSION['game']=$this->game;
-                    echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo);
+                    echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo->playerName);
                 }else{
-                    echo HtmlHelper::getShipsPlacementPage($this->game->playerOne);
+                    echo HtmlHelper::getShipsPlacementPage($this->game->playerOne->playerName);
                 }
             }else{
                 if (Helper::verifyInputFieldArray($_POST)){
@@ -40,18 +41,18 @@ class Application
                     header("Refresh:0; url=index.php?state=startGame");
                     exit;
                 }else{
-                    echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo);
+                    echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo->playerName);
                 }
             }
         }else{
-            echo HtmlHelper::getShipsPlacementPage($this->game->playerOne);
+            echo HtmlHelper::getShipsPlacementPage($this->game->playerOne->playerName);
         }
     }
 
     protected function createGame(string $playerOne, string $playerTwo)
     {
         $this->game=new Game($playerOne, $playerTwo);
-        $_SESSION['game']=$this->game;
+        //$_SESSION['game']=$this->game;
         header("Refresh:0; url=index.php?state=preparePhase");
         exit;
     }

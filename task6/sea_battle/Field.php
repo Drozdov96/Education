@@ -1,21 +1,24 @@
 <?php
 
 //namespace sea_battle;
-
+//TODO make separate function to work with DB.
 
 class Field
 {
+    protected $fieldId;
+    protected $ownerId;
     public $cellsArray;
 
-    public function __construct()
+    public function __construct(int $gameId, int $ownerId)
     {
+        $this->fieldId=DatabaseHelper::createField($gameId, $ownerId);
         $this->cellsArray=array();
 
         for($i=1;$i<=10;$i++)
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[]=new Cell($i,$j);
+                $this->cellsArray[]=new Cell($i,$j, $this->fieldId);
             }
         }
     }

@@ -13,14 +13,17 @@ class Cell
      * hit= клетка в которую выстрелили и попали по кораблю;
      * miss= клетка в которую выстрелили и попали в пустую клетку;
      */
+    public $cellId;
     public $cellState;
     public $coordinateX;
     public $coordinateY;
 
-    public function __construct(int $x, int $y)
+    public function __construct(int $x, int $y, int $fieldId)
     {
         $this->cellState='empty';
         $this->coordinateX=$x;
         $this->coordinateY=$y;
+        $this->cellId=DatabaseHelper::createCell($fieldId, $x, $y,
+            $this->cellState);
     }
 }

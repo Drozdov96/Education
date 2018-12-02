@@ -2,6 +2,7 @@
 
 class Game
 {
+    protected $gameId;
     protected $steps;
     protected $fieldOne;
     protected $fieldTwo;
@@ -10,8 +11,13 @@ class Game
 
     public function __construct(string $playerOne, string $playerTwo)
     {
-        $this->playerOne=$playerOne;
-        $this->playerTwo=$playerTwo;
+        $this->playerOne=new Player($playerOne);
+        $this->playerTwo=new Player($playerTwo);
+        $idOne=$this->playerOne->getPlayerId();
+        $idTwo=$this->playerTwo->getPlayerId();
+
+        $this->gameId=DatabaseHelper::createGame($idOne, $idTwo);
+        $_SESSION['gameId']=$this->gameId;
     }
 
     public function startGame()
@@ -24,6 +30,7 @@ class Game
 //        $this->FieldTwo->fillWithShips($fieldTwo);
     }
 
+    //TODO refactor this method.
     public function setField(int $fieldNum, string $field)
     {
         if($fieldNum===0){
@@ -35,27 +42,28 @@ class Game
         }
     }
 
-    public function fieldEmpty(int $fieldNum)
+    //TODO discover usefulness of this function
+    public function fieldEmpty(int $fieldNum): bool
     {
         if($fieldNum===0){
-            return !empty($this->fieldOne);
+            return empty($this->fieldOne);
         }else{
-            return !empty($this->fieldTwo);
+            return empty($this->fieldTwo);
         }
     }
 
-        /*
-         * Функция обрабатывает ход игрока, делает соответствующие изменения в полях и возвращает
-         * игрока, который будет делать следующий ход.
-         */
+    /*
+     * Функция обрабатывает ход игрока, делает соответствующие изменения в полях и возвращает
+     * игрока, который будет делать следующий ход.
+     */
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
-        $step=[
-            'x'=>$x,
-            'y'=>$y,
-            'playerNum'=>$currentPlayerNum
-        ];
-        array_push($this->steps, $step);
+//        $step=[
+//            'x'=>$x,
+//            'y'=>$y,
+//            'playerNum'=>$currentPlayerNum
+//        ];
+//        array_push($this->steps, $step);
 
         if($currentPlayerNum===0){
             switch($this->fieldTwo->getCellState((int)$x,(int)$y)) {
