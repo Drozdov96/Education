@@ -84,6 +84,7 @@ class Application
         //Доработать вывод, функция возвращает текущего игрока.
         $_SESSION['currentPlayerNum']=$this->game->
         doStep($x, $y, $currentPlayerNum);
+        echo $_SESSION['currentPlayerNum'];
         //$this->game->saveFieldsToFile();
         //$_SESSION['game']=$this->game;
         if($_SESSION['currentPlayerNum']===0){

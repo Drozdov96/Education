@@ -49,7 +49,7 @@ class Field
                 reset($value);
                 if($cell->coordinateX===(int)current($value) &&
                     $cell->coordinateY===(int)next($value)){
-                    $cell->setCellState('ship');
+                    $cell->setCellState('ship    ');
                     usleep(50000);
                 }
             }
@@ -70,6 +70,7 @@ class Field
     {
         foreach ($this->cellsArray as &$cell){
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
+                var_dump($cell->cellState);
                 return $cell->cellState;
             }
         }

@@ -74,18 +74,18 @@ class Game
 
         if($currentPlayerNum===0){
             switch($this->fieldTwo->getCellState((int)$x,(int)$y)) {
-                case 'empty': $this->fieldTwo->setCellState((int)$x,(int)$y, 'miss');
+                case 'empty   ': $this->fieldTwo->setCellState((int)$x,(int)$y, 'miss    ');
                     $currentPlayerNum=1;
                     break;
-                case 'ship': $this->fieldTwo->setCellState((int)$x,(int)$y, 'hit');
+                case 'ship    ': $this->fieldTwo->setCellState((int)$x,(int)$y, 'hit     ');
                     break;
             }
         }else{
             switch($this->fieldOne->getCellState((int)$x,(int)$y)) {
-                case 'empty': $this->fieldOne->setCellState((int)$x,(int)$y, 'miss');
+                case 'empty   ': $this->fieldOne->setCellState((int)$x,(int)$y, 'miss    ');
                     $currentPlayerNum=0;
                     break;
-                case 'ship': $this->fieldOne->setCellState((int)$x,(int)$y, 'hit');
+                case 'ship    ': $this->fieldOne->setCellState((int)$x,(int)$y, 'hit     ');
                     break;
             }
         }
@@ -121,7 +121,7 @@ class Game
         }
         if(!empty($gameArray['field_two'])){
             $this->fieldTwo=new Field();
-            $this->fieldTwo->loadField($gameArray['field_one']);
+            $this->fieldTwo->loadField($gameArray['field_two']);
         }
     }
 }
