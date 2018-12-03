@@ -6,10 +6,9 @@
 class Field
 {
     protected $fieldId;
-    protected $ownerId;
     public $cellsArray;
 
-    public function __construct(int $gameId, int $ownerId)
+    public function createField(int $gameId, int $ownerId)
     {
         $this->fieldId=DatabaseHelper::createField($gameId, $ownerId);
         $this->cellsArray=array();
@@ -18,7 +17,22 @@ class Field
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[]=new Cell($i,$j, $this->fieldId);
+                $this->cellsArray[]=new Cell('create',$i,$j, $this->fieldId);
+            }
+        }
+    }
+
+    public function loadField(int $fieldId)
+    {
+        $this->fieldId=$fieldId;
+
+        $this->cellsArray=array();
+
+        for($i=1;$i<=10;$i++)
+        {
+            for($j=1;$j<=10;$j++)
+            {
+                $this->cellsArray[]=new Cell('load', $i,$j, $this->fieldId);
             }
         }
     }
@@ -43,7 +57,8 @@ class Field
     {
         foreach ($this->cellsArray as &$cell){
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
-                $cell->cellState=$state;
+                $cell->setcellState($state);
+                return;
             }
         }
     }

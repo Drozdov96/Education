@@ -18,12 +18,27 @@ class Cell
     public $coordinateX;
     public $coordinateY;
 
-    public function __construct(int $x, int $y, int $fieldId)
-    {
-        $this->cellState='empty';
+    public function __construct(string $action, int $x, int $y, int $fieldId){
+
         $this->coordinateX=$x;
         $this->coordinateY=$y;
-        $this->cellId=DatabaseHelper::createCell($fieldId, $x, $y,
-            $this->cellState);
+        switch ($action){
+            case 'create':
+                $this->cellState='empty';
+                $this->cellId=DatabaseHelper::createCell($fieldId, $x, $y,
+                    $this->cellState);
+                break;
+            case 'load':
+                $cellParamsArray=DatabaseHelper::loadCell($fieldId, $x, $y);
+                $this->cellId=$cellParamsArray['id'];
+                $this->cellState=$cellParamsArray['state'];
+                break;
+        }
+    }
+
+    public function setCellState(string $state)
+    {
+        $this->cellState=$state;
+        DatabaseHelper::changeCellState($this->cellId, $this->cellState);
     }
 }

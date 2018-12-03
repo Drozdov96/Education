@@ -11,9 +11,8 @@ function autoload($class)
 
 //session_start();
 //
-//$app= new Application($_SESSION['game']);
+//$app= new Application($_SESSION['gameId']);
 //$app->doRoute($_GET['state']===null?"":$_GET['state']);
-DatabaseHelper::getConnection();
-var_dump(DatabaseHelper::getPlayerIdFromDb("admin12"));
+
 
 

@@ -52,12 +52,12 @@ class DatabaseHelper
             return false;
         }
 
-        self::$dbc->query("INSERT INTO fields (game_id, owner_id) 
+        self::$dbc->query("INSERT INTO fields (game_id, owner) 
               VALUES (".(string)$gameId.", ".(string)$ownerId.")");
 
         $query=self::$dbc->query("SELECT fields.id, games.player_one, 
         games.player_two FROM fields INNER JOIN games ON 
-        fields.game_id=games.id WHERE games.id=".(string)$gameId.
+        fields.game_id=games.id WHERE fields.game_id=".(string)$gameId.
             "AND fields.owner= ".(string)$ownerId);
         $result=$query->fetch();
 
@@ -94,5 +94,54 @@ class DatabaseHelper
         $result=$query->fetch();
 
         return $result['id'];
+    }
+
+    public static function loadGame(int $gameId): array
+    {
+        if(!isset(self::$dbc)){
+            return false;
+        }
+
+        $query=self::$dbc->query("SELECT * FROM games WHERE id=".
+            (string)$gameId);
+        $result=$query->fetch();
+
+        return $result;
+    }
+
+    public static function loadPlayer(int $playerId): string
+    {
+        if(!isset(self::$dbc)){
+            return false;
+        }
+
+        $query=self::$dbc->query("SELECT name FROM games WHERE id=".
+            (string)$playerId);
+        $result=$query->fetch();
+
+        return $result['name'];
+    }
+
+    public static function loadCell(int $fieldId, int $x, int $y)
+    {
+        if(!isset(self::$dbc)){
+            return false;
+        }
+
+        $query=self::$dbc->query("SELECT * FROM cells WHERE field=".
+            (string)$fieldId." AND coordinate_x=".(string)$x." AND coordinate_y=".(string)$y);
+        $result=$query->fetch();
+
+        return $result;
+    }
+
+    public static function changeCellState(int $cellId, string $state)
+    {
+        if(!isset(self::$dbc)){
+            return false;
+        }
+
+        self::$dbc->query("UPDATE cells SET state='${state}' WHERE id=".
+            (string)$cellId);
     }
 }

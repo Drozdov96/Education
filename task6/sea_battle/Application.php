@@ -13,11 +13,12 @@ class Application
 {
     protected $game;
 
-    public function __construct($game)
+    public function __construct($gameId)
     {
         //где лучше проверять на пустоту. уже в функции, или до того, как её дёрнуть
         if(!empty($game)){
-            $this->game=$game;
+            $this->game=new Game();
+            $this->game->loadGame($gameId);
         }
     }
 
@@ -28,7 +29,7 @@ class Application
             if($this->game->fieldEmpty(0)) {
                 if (Helper::verifyInputFieldArray($_POST)){
                     $this->game->setField(0, Helper::convertFieldArrayToString($_POST));
-                    $_SESSION['game']=$this->game;
+                    //$_SESSION['game']=$this->game;
                     echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo->playerName);
                 }else{
                     echo HtmlHelper::getShipsPlacementPage($this->game->playerOne->playerName);
@@ -36,8 +37,7 @@ class Application
             }else{
                 if (Helper::verifyInputFieldArray($_POST)){
                     $this->game->setField(1, Helper::convertFieldArrayToString($_POST));
-                    $_SESSION['game']=$this->game;
-
+                    //$_SESSION['game']=$this->game;
                     header("Refresh:0; url=index.php?state=startGame");
                     exit;
                 }else{
@@ -51,7 +51,8 @@ class Application
 
     protected function createGame(string $playerOne, string $playerTwo)
     {
-        $this->game=new Game($playerOne, $playerTwo);
+        $this->game=new Game();
+        $this->game->createGame($playerOne, $playerTwo);
         //$_SESSION['game']=$this->game;
         header("Refresh:0; url=index.php?state=preparePhase");
         exit;
@@ -64,12 +65,11 @@ class Application
 
     protected function runGame()
     {
-        $this->game->startGame();
         $_SESSION['currentPlayerNum']=0;
-        $this->game->saveFieldsToFile();
-        $_SESSION['game']=$this->game;
+        //$this->game->saveFieldsToFile();
+        //$_SESSION['game']=$this->game;
         echo HtmlHelper::getGamePage($_SESSION['currentPlayerNum']===0?
-            $this->game->playerOne: $this->game->playerTwo);
+            $this->game->playerOne->playerName: $this->game->playerTwo->playerName);
     }
 
     protected function doStep(string $x, string $y,  int $currentPlayerNum)
@@ -77,10 +77,10 @@ class Application
         //Доработать вывод, функция возвращает текущего игрока.
         $_SESSION['currentPlayerNum']=$this->game->
         doStep($x, $y, $currentPlayerNum);
-        $this->game->saveFieldsToFile();
-        $_SESSION['game']=$this->game;
+        //$this->game->saveFieldsToFile();
+        //$_SESSION['game']=$this->game;
         echo HtmlHelper::getGamePage($_SESSION['currentPlayerNum']===0?
-            $this->game->playerOne: $this->game->playerTwo);
+            $this->game->playerOne->playerName: $this->game->playerTwo->playerName);
     }
 
     //можно ли не ставить жесткую типизацию

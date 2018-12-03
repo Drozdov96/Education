@@ -9,10 +9,13 @@ class Game
     public $playerOne;
     public $playerTwo;
 
-    public function __construct(string $playerOne, string $playerTwo)
+    public function createGame(string $playerOne, string $playerTwo)
     {
-        $this->playerOne=new Player($playerOne);
-        $this->playerTwo=new Player($playerTwo);
+        $this->steps=array();
+        $this->playerOne=new Player();
+        $this->playerTwo=new Player();
+        $this->playerOne->setPlayer($playerOne);
+        $this->playerTwo->setPlayer($playerTwo);
         $idOne=$this->playerOne->getPlayerId();
         $idTwo=$this->playerTwo->getPlayerId();
 
@@ -20,24 +23,16 @@ class Game
         $_SESSION['gameId']=$this->gameId;
     }
 
-    public function startGame()
-    {
-        $this->steps=array();
-//        $this->FieldOne=new Field();
-//        $this->FieldOne->fillWithShips($fieldOne);
-//
-//        $this->FieldTwo=new Field();
-//        $this->FieldTwo->fillWithShips($fieldTwo);
-    }
-
     //TODO refactor this method.
     public function setField(int $fieldNum, string $field)
     {
         if($fieldNum===0){
             $this->fieldOne=new Field();
+            $this->fieldOne->createField($this->gameId,$this->playerOne);
             $this->fieldOne->fillWithShips($field);
         }else{
             $this->fieldTwo=new Field();
+            $this->fieldTwo->createField($this->gameId,$this->playerTwo);
             $this->fieldTwo->fillWithShips($field);
         }
     }
@@ -96,5 +91,22 @@ class Game
         $fileTwo=fopen("./task6/sea_battle/files/field_two.txt","w");
         fwrite($fileTwo, $json);
         fclose($fileTwo);
+    }
+
+    public function loadGame(int $gameId)
+    {
+        $this->gameId=$gameId;
+        $gameArray=DatabaseHelper::loadGame($gameId);
+
+        $this->playerOne=new Player();
+        $this->playerOne->loadPlayer($gameArray['player_one']);
+        $this->playerTwo=new Player();
+        $this->playerTwo->loadPlayer($gameArray['player_two']);
+
+        $this->fieldOne=new Field();
+        $this->fieldOne->loadField($gameArray['field_one']);
+        $this->fieldTwo=new Field();
+        $this->fieldTwo->loadField($gameArray['field_one']);
+
     }
 }
