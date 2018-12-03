@@ -18,6 +18,7 @@ class Field
             for($j=1;$j<=10;$j++)
             {
                 $this->cellsArray[]=new Cell('create',$i,$j, $this->fieldId);
+                usleep(50000);
             }
         }
     }
@@ -33,6 +34,7 @@ class Field
             for($j=1;$j<=10;$j++)
             {
                 $this->cellsArray[]=new Cell('load', $i,$j, $this->fieldId);
+                usleep(50000);
             }
         }
     }
@@ -47,7 +49,8 @@ class Field
                 reset($value);
                 if($cell->coordinateX===(int)current($value) &&
                     $cell->coordinateY===(int)next($value)){
-                    $cell->cellState='ship';
+                    $cell->setCellState('ship');
+                    usleep(50000);
                 }
             }
         }
@@ -57,7 +60,7 @@ class Field
     {
         foreach ($this->cellsArray as &$cell){
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
-                $cell->setcellState($state);
+                $cell->setCellState($state);
                 return;
             }
         }

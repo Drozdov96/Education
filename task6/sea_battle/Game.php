@@ -28,13 +28,25 @@ class Game
     {
         if($fieldNum===0){
             $this->fieldOne=new Field();
-            $this->fieldOne->createField($this->gameId,$this->playerOne);
+            $this->fieldOne->createField($this->gameId,$this->playerOne->
+            getPlayerId());
             $this->fieldOne->fillWithShips($field);
         }else{
             $this->fieldTwo=new Field();
-            $this->fieldTwo->createField($this->gameId,$this->playerTwo);
+            $this->fieldTwo->createField($this->gameId,$this->playerTwo->
+            getPlayerId());
             $this->fieldTwo->fillWithShips($field);
         }
+    }
+
+    public function getFieldOne()
+    {
+        return $this->fieldOne->cellsArray;
+    }
+
+    public function getFieldTwo()
+    {
+        return $this->fieldTwo->cellsArray;
     }
 
     //TODO discover usefulness of this function
@@ -103,10 +115,13 @@ class Game
         $this->playerTwo=new Player();
         $this->playerTwo->loadPlayer($gameArray['player_two']);
 
-        $this->fieldOne=new Field();
-        $this->fieldOne->loadField($gameArray['field_one']);
-        $this->fieldTwo=new Field();
-        $this->fieldTwo->loadField($gameArray['field_one']);
-
+        if(!empty($gameArray['field_one'])){
+            $this->fieldOne=new Field();
+            $this->fieldOne->loadField($gameArray['field_one']);
+        }
+        if(!empty($gameArray['field_two'])){
+            $this->fieldTwo=new Field();
+            $this->fieldTwo->loadField($gameArray['field_one']);
+        }
     }
 }

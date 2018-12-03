@@ -71,16 +71,17 @@ class HtmlHelper
         return $resultPageString;
     }
 
-    public static function getGamePage(string $currentPlayer)
+    public static function getGamePage(string $currentPlayer, array $friendlyField,
+                                       array $enemyField)
     {
-        $currentPlayerNum=$_SESSION['currentPlayerNum'];
-        if($currentPlayerNum===0){
-            $friendlyField=Helper::loadFieldOneFromFile();
-            $enemyField=Helper::loadFieldTwoFromFile();
-        }else{
-            $friendlyField=Helper::loadFieldTwoFromFile();
-            $enemyField=Helper::loadFieldOneFromFile();
-        }
+//        $currentPlayerNum=$_SESSION['currentPlayerNum'];
+//        if($currentPlayerNum===0){
+//            $friendlyField=Helper::loadFieldOneFromFile();
+//            $enemyField=Helper::loadFieldTwoFromFile();
+//        }else{
+//            $friendlyField=Helper::loadFieldTwoFromFile();
+//            $enemyField=Helper::loadFieldOneFromFile();
+//        }
 
         $resultPageString="<!DOCTYPE html>
               <html>

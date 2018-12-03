@@ -12,7 +12,7 @@ class Player
         $this->playerId=DatabaseHelper::getPlayerIdFromDb($playerName);
     }
 
-    public function loadPlayer($playerId)
+    public function loadPlayer(int $playerId)
     {
         $this->playerId=$playerId;
         $this->playerName=DatabaseHelper::loadPlayer($playerId);

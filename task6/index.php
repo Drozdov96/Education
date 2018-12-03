@@ -9,10 +9,10 @@ function autoload($class)
         include_once($file);
 }
 
-//session_start();
-//
-//$app= new Application($_SESSION['gameId']);
-//$app->doRoute($_GET['state']===null?"":$_GET['state']);
+session_start();
+
+$app= new Application($_SESSION['gameId']);
+$app->doRoute($_GET['state']===null?"":$_GET['state']);
 
 
 

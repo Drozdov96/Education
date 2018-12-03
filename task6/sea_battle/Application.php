@@ -15,8 +15,9 @@ class Application
 
     public function __construct($gameId)
     {
+        DatabaseHelper::getConnection();
         //где лучше проверять на пустоту. уже в функции, или до того, как её дёрнуть
-        if(!empty($game)){
+        if(!empty($gameId)){
             $this->game=new Game();
             $this->game->loadGame($gameId);
         }
@@ -38,6 +39,7 @@ class Application
                 if (Helper::verifyInputFieldArray($_POST)){
                     $this->game->setField(1, Helper::convertFieldArrayToString($_POST));
                     //$_SESSION['game']=$this->game;
+                    sleep(5);
                     header("Refresh:0; url=index.php?state=startGame");
                     exit;
                 }else{
@@ -67,9 +69,14 @@ class Application
     {
         $_SESSION['currentPlayerNum']=0;
         //$this->game->saveFieldsToFile();
+//        for ($i=1; $i<=10;$i++){
+//            for($j=1;$j<=10; $j++){
+//                echo Helper::getFriendlyClass($i, $j, $this->game->getFieldOne())."<br>";
+//            }
+//        }
         //$_SESSION['game']=$this->game;
-        echo HtmlHelper::getGamePage($_SESSION['currentPlayerNum']===0?
-            $this->game->playerOne->playerName: $this->game->playerTwo->playerName);
+        echo HtmlHelper::getGamePage($this->game->playerOne->playerName,
+            $this->game->getFieldOne(), $this->game->getFieldTwo());
     }
 
     protected function doStep(string $x, string $y,  int $currentPlayerNum)
@@ -79,8 +86,13 @@ class Application
         doStep($x, $y, $currentPlayerNum);
         //$this->game->saveFieldsToFile();
         //$_SESSION['game']=$this->game;
-        echo HtmlHelper::getGamePage($_SESSION['currentPlayerNum']===0?
-            $this->game->playerOne->playerName: $this->game->playerTwo->playerName);
+        if($_SESSION['currentPlayerNum']===0){
+            echo HtmlHelper::getGamePage($this->game->playerOne->playerName,
+                $this->game->getFieldOne(), $this->game->getFieldTwo());
+        }else{
+            echo HtmlHelper::getGamePage($this->game->playerTwo->playerName,
+                $this->game->getFieldTwo(),$this->game->getFieldOne());
+        }
     }
 
     //можно ли не ставить жесткую типизацию

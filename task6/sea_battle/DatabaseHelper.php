@@ -5,6 +5,7 @@ class DatabaseHelper
     private static $dbc;
 
     public static function getConnection(){
+        //
         self::$dbc = new PDO("pgsql:host=/var/run/postgresql port=5432 
         dbname=battleship user=www-data");
     }
@@ -25,7 +26,9 @@ class DatabaseHelper
             }
         }while(empty($result));
 
-        return $result['id'];
+        $id=$result['id'];
+        unset($result, $query);
+        return $id;
     }
 
     public static function createGame(int $idOne, int $idTwo)
@@ -42,7 +45,9 @@ class DatabaseHelper
             "AND winner IS NULL AND end_timestamp IS NULL");
         $result=$query->fetch();
 
-        return $result['id'];
+        $id=$result['id'];
+        unset($result, $query);
+        return $id;
     }
 
 
@@ -74,7 +79,9 @@ class DatabaseHelper
                 return false;
         }
 
-        return $result['id'];
+        $id=$result['id'];
+        unset($result, $query);
+        return $id;
     }
 
     public static function createCell(int $fieldId, int $coordX,int $coordY,
@@ -93,7 +100,9 @@ class DatabaseHelper
             " AND coordinate_y=".(string)$coordY);
         $result=$query->fetch();
 
-        return $result['id'];
+        $id=$result['id'];
+        unset($result, $query);
+        return $id;
     }
 
     public static function loadGame(int $gameId): array
@@ -106,6 +115,7 @@ class DatabaseHelper
             (string)$gameId);
         $result=$query->fetch();
 
+        unset($query);
         return $result;
     }
 
@@ -115,11 +125,13 @@ class DatabaseHelper
             return false;
         }
 
-        $query=self::$dbc->query("SELECT name FROM games WHERE id=".
+        $query=self::$dbc->query("SELECT name FROM players WHERE id=".
             (string)$playerId);
         $result=$query->fetch();
 
-        return $result['name'];
+        $name=$result['name'];
+        unset($result, $query);
+        return $name;
     }
 
     public static function loadCell(int $fieldId, int $x, int $y)
@@ -132,6 +144,7 @@ class DatabaseHelper
             (string)$fieldId." AND coordinate_x=".(string)$x." AND coordinate_y=".(string)$y);
         $result=$query->fetch();
 
+        unset($query);
         return $result;
     }
 

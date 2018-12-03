@@ -41,7 +41,7 @@ class Helper
         $fourDeckCount=0;
         for ($i = 1; $i <= 10; $i++) {
             for ($j = 1; $j <= 10; $j++) {
-                if($fieldArray[(string)$i.'-'.(string)$j]==='ship') {
+                if(!empty($fieldArray[(string)$i.'-'.(string)$j]) && $fieldArray[(string)$i.'-'.(string)$j]==='ship') {
                     switch(Helper::checkShip($i, $j, $fieldArray, 0)){
                         case 0:
                             return false;
@@ -154,9 +154,9 @@ class Helper
         foreach ($field as $value){
             if($value->coordinateX===$x && $value->coordinateY===$y){
                 switch ($value->cellState){
-                    case 'hit': return "breakShipCell";
+                    case 'hit     ': return "breakShipCell";
                         break;
-                    case 'miss': return "emptyCell";
+                    case 'miss    ': return "emptyCell";
                         break;
                     default: return "hide";
                 }
@@ -170,19 +170,21 @@ class Helper
         foreach ($field as $value){
             if($value->coordinateX===$x && $value->coordinateY===$y){
                 switch ($value->cellState){
-                    case 'empty': return "emptyCell";
+                    case 'empty   ':
+                        return "emptyCell";
                         break;
-                    case 'ship': return "ship";
+                    case 'ship    ':
+                        return "ship";
                         break;
-                    case 'hit': return "breakShipCell";
+                    case 'hit     ':
+                        return "breakShipCell";
                         break;
-                    case 'miss': return "miss";
+                    case 'miss    ':
+                        return "miss";
                         break;
-                    default: return "";
                 }
             }
         }
-        return "";
     }
 
     public static function loadFieldOneFromFile(){
