@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Flatty
- * Date: 10.11.2018
- * Time: 10:46
- */
 
 //namespace sea_battle;
 
@@ -13,11 +7,12 @@ class Application
 {
     protected $game;
 
-    public function __construct($gameId)
+    public function __construct(int $gameId)
     {
         DatabaseHelper::getConnection();
+
         //где лучше проверять на пустоту. уже в функции, или до того, как её дёрнуть
-        if(!empty($gameId)){
+        if($gameId !== -1){
             $this->game=new Game();
             $this->game->loadGame($gameId);
         }
@@ -39,7 +34,6 @@ class Application
                 if (Helper::verifyInputFieldArray($_POST)){
                     $this->game->setField(1, Helper::convertFieldArrayToString($_POST));
                     //$_SESSION['game']=$this->game;
-                    sleep(5);
                     header("Refresh:0; url=index.php?state=startGame");
                     exit;
                 }else{
@@ -84,10 +78,15 @@ class Application
         //Доработать вывод, функция возвращает текущего игрока.
         $_SESSION['currentPlayerNum']=$this->game->
         doStep($x, $y, $currentPlayerNum);
-        echo $_SESSION['currentPlayerNum'];
-        //$this->game->saveFieldsToFile();
-        //$_SESSION['game']=$this->game;
-        if($_SESSION['currentPlayerNum']===0){
+
+        if($this->game->checkEndGame($_SESSION['currentPlayerNum'])){
+            unset($_SESSION['gameId']);
+            if($_SESSION['currentPlayerNum']===0){
+                echo HtmlHelper::getEndGamePage($this->game->playerOne->playerName);
+            }else{
+                echo HtmlHelper::getEndGamePage($this->game->playerTwo->playerName);
+            }
+        }elseif($_SESSION['currentPlayerNum']===0){
             echo HtmlHelper::getGamePage($this->game->playerOne->playerName,
                 $this->game->getFieldOne(), $this->game->getFieldTwo());
         }else{
