@@ -124,4 +124,22 @@ class Game
             $this->fieldTwo->loadField($gameArray['field_two']);
         }
     }
+
+    public function checkEndGame(int $currentPlayer): bool
+    {
+        if($currentPlayer===0){
+            if(DatabaseHelper::getShipsNum($this->fieldTwo->getFieldId())===0) {
+                DatabaseHelper::setWinnerAndTime($this->playerOne->getPlayerId(),
+                    $this->gameId);
+                return true;
+            }
+        }else {
+            if (DatabaseHelper::getShipsNum($this->fieldOne->getFieldId()) === 0) {
+                DatabaseHelper::setWinnerAndTime($this->playerTwo->getPlayerId(),
+                    $this->gameId);
+                return true;
+            }
+        }
+        return false;
+    }
 }

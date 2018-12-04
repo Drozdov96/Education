@@ -157,4 +157,28 @@ class DatabaseHelper
         self::$dbc->query("UPDATE cells SET state='${state}' WHERE id=".
             (string)$cellId);
     }
+
+    public static function getShipsNum(int $fieldId)
+    {
+        if(!isset(self::$dbc)){
+            return false;
+        }
+
+        $query=self::$dbc->query("SELECT * FROM cells WHERE field=".
+            (string)$fieldId." AND state='ship'");
+        $result=$query->fetchAll();
+        $shipsNum=count($result);
+        unset($query, $result);
+        return $shipsNum;
+    }
+
+    public static function setWinnerAndTime(int $winnerId, int $gameId)
+    {
+        if(!isset(self::$dbc)){
+            return false;
+        }
+
+        self::$dbc->query("UPDATE games SET winner=".(string)$winnerId." , end_timestamp=current_timestamp WHERE id=".
+            (string)$gameId);
+    }
 }

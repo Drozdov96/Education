@@ -11,8 +11,11 @@ function autoload($class)
 
 session_start();
 
-$app= new Application($_SESSION['gameId']);
-$app->doRoute($_GET['state']===null?"":$_GET['state']);
+if(empty($_SESSION['gameId'])){
+    $app= new Application(-1);
+}else{
+    $app= new Application($_SESSION['gameId']);
+}
 
-
+$app->doRoute(empty($_GET['state'])?"":$_GET['state']);
 

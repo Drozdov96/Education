@@ -95,13 +95,17 @@ class Helper
 
     public static function switchCoordinatesToNeighbourShip(int &$x, int &$y, array $fieldArray)
     {
-        if($fieldArray[(string)($x+1).'-'.(string)($y)]==='ship'){
+        if(!empty($fieldArray[(string)($x+1).'-'.(string)($y)]) &&
+            $fieldArray[(string)($x+1).'-'.(string)($y)]==='ship'){
             $x+=1;
-        }elseif ($fieldArray[(string)($x-1).'-'.(string)($y)]==='ship'){
+        }elseif (!empty($fieldArray[(string)($x-1).'-'.(string)($y)]) &&
+            $fieldArray[(string)($x-1).'-'.(string)($y)]==='ship'){
             $x-=1;
-        }elseif ($fieldArray[(string)($x).'-'.(string)($y+1)]==='ship'){
+        }elseif (!empty($fieldArray[(string)($x).'-'.(string)($y+1)]) &&
+            $fieldArray[(string)($x).'-'.(string)($y+1)]==='ship'){
             $y+=1;
-        }elseif ($fieldArray[(string)($x).'-'.(string)($y-1)]==='ship') {
+        }elseif (!empty($fieldArray[(string)($x).'-'.(string)($y-1)]) &&
+            $fieldArray[(string)($x).'-'.(string)($y-1)]==='ship') {
             $y-=1;
         }
     }
@@ -109,16 +113,20 @@ class Helper
     public static function checkNearShipsNum(int $x,int $y,array $fieldArray): int
     {
         $resultNum=0;
-        if($fieldArray[(string)($x+1).'-'.(string)($y)]==='ship'){
+        if(!empty($fieldArray[(string)($x+1).'-'.(string)($y)]) &&
+            $fieldArray[(string)($x+1).'-'.(string)($y)]==='ship'){
             $resultNum++;
         }
-        if ($fieldArray[(string)($x-1).'-'.(string)($y)]==='ship'){
+        if (!empty($fieldArray[(string)($x-1).'-'.(string)($y)]) &&
+            $fieldArray[(string)($x-1).'-'.(string)($y)]==='ship'){
             $resultNum++;
         }
-        if ($fieldArray[(string)($x).'-'.(string)($y+1)]==='ship'){
+        if (!empty($fieldArray[(string)($x).'-'.(string)($y+1)]) &&
+            $fieldArray[(string)($x).'-'.(string)($y+1)]==='ship'){
             $resultNum++;
         }
-        if ($fieldArray[(string)($x).'-'.(string)($y-1)]==='ship') {
+        if (!empty($fieldArray[(string)($x).'-'.(string)($y-1)]) &&
+            $fieldArray[(string)($x).'-'.(string)($y-1)]==='ship') {
             $resultNum++;
         }
         return $resultNum;

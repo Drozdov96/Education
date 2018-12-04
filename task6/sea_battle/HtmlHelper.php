@@ -169,4 +169,18 @@ class HtmlHelper
         </style>";
         return $resultPageString;
     }
+
+    public static function getEndGamePage(string $winnerName)
+    {
+        return "<!DOCTYPE html>
+              <html>
+                <head>
+                    <meta charset=\"utf-8\"/>
+                    <title>Game end</title>
+                </head>
+                <body style=\"min-width: 1000px;\">
+                <h1>Player ".$winnerName." has won!</h1>
+                </body>
+              </html>";
+    }
 }

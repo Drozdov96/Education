@@ -18,7 +18,6 @@ class Field
             for($j=1;$j<=10;$j++)
             {
                 $this->cellsArray[]=new Cell('create',$i,$j, $this->fieldId);
-                usleep(50000);
             }
         }
     }
@@ -34,7 +33,6 @@ class Field
             for($j=1;$j<=10;$j++)
             {
                 $this->cellsArray[]=new Cell('load', $i,$j, $this->fieldId);
-                usleep(50000);
             }
         }
     }
@@ -50,7 +48,6 @@ class Field
                 if($cell->coordinateX===(int)current($value) &&
                     $cell->coordinateY===(int)next($value)){
                     $cell->setCellState('ship    ');
-                    usleep(50000);
                 }
             }
         }
@@ -70,7 +67,6 @@ class Field
     {
         foreach ($this->cellsArray as &$cell){
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
-                var_dump($cell->cellState);
                 return $cell->cellState;
             }
         }
@@ -80,5 +76,10 @@ class Field
     public function convertCellsArrayToJson() : string
     {
         return json_encode($this->cellsArray);
+    }
+
+    public function getFieldId()
+    {
+        return $this->fieldId;
     }
 }
