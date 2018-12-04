@@ -73,12 +73,12 @@ class Field
         return "";
     }
 
-    public function convertCellsArrayToJson() : string
-    {
-        return json_encode($this->cellsArray);
-    }
+//    public function convertCellsArrayToJson() : string
+//    {
+//        return json_encode($this->cellsArray);
+//    }
 
-    public function getFieldId()
+    public function getFieldId(): int
     {
         return $this->fieldId;
     }

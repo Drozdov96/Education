@@ -92,18 +92,18 @@ class Game
         return $currentPlayerNum;
     }
 
-    public function saveFieldsToFile()
-    {
-        $json=$this->fieldOne->convertCellsArrayToJson();
-        $fileOne=fopen("./task6/sea_battle/files/field_one.txt","w");
-        fwrite($fileOne, $json);
-        fclose($fileOne);
-
-        $json=$this->fieldTwo->convertCellsArrayToJson();
-        $fileTwo=fopen("./task6/sea_battle/files/field_two.txt","w");
-        fwrite($fileTwo, $json);
-        fclose($fileTwo);
-    }
+//    public function saveFieldsToFile()
+//    {
+//        $json=$this->fieldOne->convertCellsArrayToJson();
+//        $fileOne=fopen("./task6/sea_battle/files/field_one.txt","w");
+//        fwrite($fileOne, $json);
+//        fclose($fileOne);
+//
+//        $json=$this->fieldTwo->convertCellsArrayToJson();
+//        $fileTwo=fopen("./task6/sea_battle/files/field_two.txt","w");
+//        fwrite($fileTwo, $json);
+//        fclose($fileTwo);
+//    }
 
     public function loadGame(int $gameId)
     {

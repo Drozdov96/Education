@@ -13,7 +13,7 @@ class Cell
      * hit= клетка в которую выстрелили и попали по кораблю;
      * miss= клетка в которую выстрелили и попали в пустую клетку;
      */
-    public $cellId;
+    protected $cellId;
     public $cellState;
     public $coordinateX;
     public $coordinateY;
