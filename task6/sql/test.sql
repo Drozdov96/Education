@@ -1,0 +1,1 @@
+CREATE TABLE Players (id SERIAL PRIMARY KEY, name varchar(32));
