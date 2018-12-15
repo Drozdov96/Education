@@ -1,6 +1,6 @@
 <?php
 // Объявляем нужные константы
-define('DB_HOST', 'localhost');
+define('DB_HOST', '/var/run/postgresql');
 define('DB_USER', 'www-data');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'battleship');
@@ -9,10 +9,9 @@ define('DB_TABLE_VERSIONS', 'versions');
 
 // Подключаемся к базе данных
 function connectDB() {
-    $errorMessage = 'Невозможно подключиться к серверу базы данных';
-    $conn = new PDO('pgsql:host='.DB_HOST.';port=5432;dbname='.DB_NAME.';', DB_USER);
-    if (!$conn)
-        throw new Exception($errorMessage);
+    $conn = new PDO("pgsql:host=".DB_HOST." port=5432 
+        dbname=".DB_NAME." user=".DB_USER);
+    return $conn;
 }
 
 
@@ -22,17 +21,23 @@ function getMigrationFiles($conn) {
     $sqlFolder = realpath(dirname(__FILE__)) . '/';
     // Получаем список всех sql-файлов
     $allFiles = glob($sqlFolder . '*.sql');
-
     // Проверяем, есть ли таблица versions
     // Так как versions создается первой, то это равносильно тому, что база не пустая
-//    $query = sprintf('show tables from `%s` like "%s"', DB_NAME, DB_TABLE_VERSIONS);
-//    $data = $conn->query($query);
-//    $firstMigration = !$data->num_rows;
+    $query=$conn->query('SELECT tablename FROM pg_catalog.pg_tables');
+    $resultArray=$query->fetchAll();
 
-    // Первая миграция, возвращаем все файлы из папки sql
-//    if ($firstMigration) {
-//        return $allFiles;
-//    }
+    $isFirstMigration=true;
+    foreach ($resultArray as $value){
+        // Первая миграция, возвращаем все файлы из папки sql
+        if(array_search('versions',$value)){
+            $isFirstMigration=false;
+            break;
+        }
+    }
+
+    if($isFirstMigration){
+        return $allFiles;
+    }
 
     // Ищем уже существующие миграции
     $versionsFiles = array();
@@ -52,15 +57,15 @@ function getMigrationFiles($conn) {
 
 // Накатываем миграцию файла
 function migrate($conn, $file) {
-    // Формируем команду выполнения mysql-запроса из внешнего файла
-    //$command = sprintf('mysql -u%s -p%s -h %s -D %s < %s', DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, $file);
+    // Формируем команду выполнения sql-запроса из внешнего файла
+    $command = 'psql -d '.DB_NAME.' -f '.$file;
     // Выполняем shell-скрипт
-    //shell_exec($command);
+    shell_exec($command);
 
     // Вытаскиваем имя файла, отбросив путь
     $baseName = basename($file);
     // Выполняем запрос
-    $conn->query('INSERT INTO '.DB_TABLE_VERSIONS.' values (name='.$baseName.')');
+    $conn->query("INSERT INTO ".DB_TABLE_VERSIONS." (name) VALUES ('".$baseName."')");
 }
 
 
