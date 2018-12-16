@@ -1,18 +1,16 @@
 <?php
 
-//namespace sea_battle;
-
-
 class Application
 {
     protected $game;
+    public const NEW_GAME_NUM=-1;
 
     public function __construct(int $gameId)
     {
         DatabaseHelper::getConnection();
 
         //где лучше проверять на пустоту. уже в функции, или до того, как её дёрнуть
-        if($gameId !== -1){
+        if($gameId !== self::NEW_GAME_NUM){
             $this->game=new Game();
             $this->game->loadGame($gameId);
         }
@@ -22,18 +20,16 @@ class Application
     protected function runPlacementPhase()
     {
         if(isset($_POST['submit_btn_place'])) {
-            if($this->game->fieldEmpty(0)) {
+            if($this->game->fieldEmpty(Game::FIELD_ONE_NUM)) {
                 if (Helper::verifyInputFieldArray($_POST)){
-                    $this->game->setField(0, Helper::convertFieldArrayToString($_POST));
-                    //$_SESSION['game']=$this->game;
+                    $this->game->setField(Game::FIELD_ONE_NUM, Helper::convertFieldArrayToString($_POST));
                     echo HtmlHelper::getShipsPlacementPage($this->game->playerTwo->playerName);
                 }else{
                     echo HtmlHelper::getShipsPlacementPage($this->game->playerOne->playerName);
                 }
             }else{
                 if (Helper::verifyInputFieldArray($_POST)){
-                    $this->game->setField(1, Helper::convertFieldArrayToString($_POST));
-                    //$_SESSION['game']=$this->game;
+                    $this->game->setField(Game::FIELD_TWO_NUM, Helper::convertFieldArrayToString($_POST));
                     header("Refresh:0; url=index.php?state=startGame");
                     exit;
                 }else{
@@ -49,7 +45,6 @@ class Application
     {
         $this->game=new Game();
         $this->game->createGame($playerOne, $playerTwo);
-        //$_SESSION['game']=$this->game;
         header("Refresh:0; url=index.php?state=preparePhase");
         exit;
     }
@@ -61,14 +56,7 @@ class Application
 
     protected function runGame()
     {
-        $_SESSION['currentPlayerNum']=0;
-        //$this->game->saveFieldsToFile();
-//        for ($i=1; $i<=10;$i++){
-//            for($j=1;$j<=10; $j++){
-//                echo Helper::getFriendlyClass($i, $j, $this->game->getFieldOne())."<br>";
-//            }
-//        }
-        //$_SESSION['game']=$this->game;
+        $_SESSION['currentPlayerNum']=Game::PLAYER_ONE_NUM;
         echo HtmlHelper::getGamePage($this->game->playerOne->playerName,
             $this->game->getFieldOne(), $this->game->getFieldTwo());
     }
@@ -81,12 +69,12 @@ class Application
 
         if($this->game->checkEndGame($_SESSION['currentPlayerNum'])){
             unset($_SESSION['gameId']);
-            if($_SESSION['currentPlayerNum']===0){
+            if($_SESSION['currentPlayerNum']===Game::PLAYER_ONE_NUM){
                 echo HtmlHelper::getEndGamePage($this->game->playerOne->playerName);
             }else{
                 echo HtmlHelper::getEndGamePage($this->game->playerTwo->playerName);
             }
-        }elseif($_SESSION['currentPlayerNum']===0){
+        }elseif($_SESSION['currentPlayerNum']===Game::PLAYER_ONE_NUM){
             echo HtmlHelper::getGamePage($this->game->playerOne->playerName,
                 $this->game->getFieldOne(), $this->game->getFieldTwo());
         }else{
@@ -95,7 +83,6 @@ class Application
         }
     }
 
-    //можно ли не ставить жесткую типизацию
     public function doRoute(string $state)
     {
         switch ($state){
@@ -116,10 +103,4 @@ class Application
                 $this->runSetNamesPhase();
         }
     }
-
-//    public function setGame(Game $game)
-//    {
-//        $this->game=$game;
-//    }
-
 }

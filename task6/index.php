@@ -1,6 +1,7 @@
 <?php
 
 define('SEABATTLE',$_SERVER['DOCUMENT_ROOT'].'/task6/sea_battle/');
+
 spl_autoload_register('autoload');
 function autoload($class)
 {
@@ -12,7 +13,7 @@ function autoload($class)
 session_start();
 
 if(empty($_SESSION['gameId'])){
-    $app= new Application(-1);
+    $app= new Application(Application::NEW_GAME_NUM);
 }else{
     $app= new Application($_SESSION['gameId']);
 }

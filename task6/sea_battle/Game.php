@@ -9,6 +9,11 @@ class Game
     public $playerOne;
     public $playerTwo;
 
+    public const FIELD_ONE_NUM=0;
+    public const FIELD_TWO_NUM=1;
+    public const PLAYER_ONE_NUM=0;
+    public const PLAYER_TWO_NUM=1;
+
     public function createGame(string $playerOne, string $playerTwo)
     {
         $this->steps=array();
@@ -26,7 +31,7 @@ class Game
     //TODO refactor this method.
     public function setField(int $fieldNum, string $field)
     {
-        if($fieldNum===0){
+        if($fieldNum===self::FIELD_ONE_NUM){
             $this->fieldOne=new Field();
             $this->fieldOne->createField($this->gameId,$this->playerOne->
             getPlayerId());
@@ -52,7 +57,7 @@ class Game
     //TODO discover usefulness of this function
     public function fieldEmpty(int $fieldNum): bool
     {
-        if($fieldNum===0){
+        if($fieldNum===self::FIELD_ONE_NUM){
             return empty($this->fieldOne);
         }else{
             return empty($this->fieldTwo);
@@ -72,38 +77,25 @@ class Game
 //        ];
 //        array_push($this->steps, $step);
 
-        if($currentPlayerNum===0){
+        if($currentPlayerNum===self::PLAYER_ONE_NUM){
             switch($this->fieldTwo->getCellState((int)$x,(int)$y)) {
-                case 'empty   ': $this->fieldTwo->setCellState((int)$x,(int)$y, 'miss    ');
-                    $currentPlayerNum=1;
+                case Cell::EMPTY_CELL_STATE: $this->fieldTwo->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
+                    $currentPlayerNum=self::FIELD_TWO_NUM;
                     break;
-                case 'ship    ': $this->fieldTwo->setCellState((int)$x,(int)$y, 'hit     ');
+                case Cell::SHIP_CELL_STATE: $this->fieldTwo->setCellState((int)$x,(int)$y, Cell::HIT_CELL_STATE);
                     break;
             }
         }else{
             switch($this->fieldOne->getCellState((int)$x,(int)$y)) {
-                case 'empty   ': $this->fieldOne->setCellState((int)$x,(int)$y, 'miss    ');
-                    $currentPlayerNum=0;
+                case Cell::EMPTY_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
+                    $currentPlayerNum=self::PLAYER_ONE_NUM;
                     break;
-                case 'ship    ': $this->fieldOne->setCellState((int)$x,(int)$y, 'hit     ');
+                case Cell::SHIP_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
                     break;
             }
         }
         return $currentPlayerNum;
     }
-
-//    public function saveFieldsToFile()
-//    {
-//        $json=$this->fieldOne->convertCellsArrayToJson();
-//        $fileOne=fopen("./task6/sea_battle/files/field_one.txt","w");
-//        fwrite($fileOne, $json);
-//        fclose($fileOne);
-//
-//        $json=$this->fieldTwo->convertCellsArrayToJson();
-//        $fileTwo=fopen("./task6/sea_battle/files/field_two.txt","w");
-//        fwrite($fileTwo, $json);
-//        fclose($fileTwo);
-//    }
 
     public function loadGame(int $gameId)
     {
@@ -127,7 +119,7 @@ class Game
 
     public function checkEndGame(int $currentPlayer): bool
     {
-        if($currentPlayer===0){
+        if($currentPlayer===self::PLAYER_ONE_NUM){
             if(DatabaseHelper::getShipsNum($this->fieldTwo->getFieldId())===0) {
                 DatabaseHelper::setWinnerAndTime($this->playerOne->getPlayerId(),
                     $this->gameId);

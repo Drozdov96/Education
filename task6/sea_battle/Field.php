@@ -17,7 +17,7 @@ class Field
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[]=new Cell('create',$i,$j, $this->fieldId);
+                $this->cellsArray[]=new Cell(Cell::CREATE_ACTION,$i,$j, $this->fieldId);
             }
         }
     }
@@ -32,7 +32,7 @@ class Field
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[]=new Cell('load', $i,$j, $this->fieldId);
+                $this->cellsArray[]=new Cell(Cell::LOAD_ACTION, $i,$j, $this->fieldId);
             }
         }
     }
@@ -47,7 +47,7 @@ class Field
                 reset($value);
                 if($cell->coordinateX===(int)current($value) &&
                     $cell->coordinateY===(int)next($value)){
-                    $cell->setCellState('ship    ');
+                    $cell->setCellState(Cell::SHIP_CELL_STATE);
                 }
             }
         }
@@ -72,11 +72,6 @@ class Field
         }
         return "";
     }
-
-//    public function convertCellsArrayToJson() : string
-//    {
-//        return json_encode($this->cellsArray);
-//    }
 
     public function getFieldId(): int
     {
