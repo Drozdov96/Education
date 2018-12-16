@@ -2,6 +2,13 @@
 
 class HtmlHelper
 {
+    public const CELL_WITH_SHIP_STRING='ship';
+    public const EMPTY_CELL_CLASS_STRING='emptyCell';
+    public const BREAK_SHIP_CLASS_STRING='breakShipCell';
+    public const SHIP_CLASS_STRING='ship';
+    public const MISS_CELL_CLASS_STRING='miss';
+    public const HIDE_CELL_CLASS_STRING='hide';
+
     public static function getPlayersNamePage(): string
     {
         return "<!DOCTYPE html>
@@ -27,21 +34,6 @@ class HtmlHelper
 
     public static function getShipsPlacementPage(string $playerName): string
     {
-        //$playerOneShipsString="";
-//        if(isset($_POST['submit_btn_place']))
-//        {
-//            if(empty($_POST['player_one']))
-//            {
-//                $playerOneShipsString=Helper::convertFieldArrayToString($_POST);
-//            }else{
-//                $_SESSION['player_one_field'] = $_POST['player_one'];
-//                $_SESSION['player_two_field'] = Helper::convertFieldArrayToString($_POST);
-//
-//                header("Refresh:0; url=index.php?state=startGame");
-//                exit;
-//            }
-//        }
-
         $resultPageString="<!DOCTYPE html>
               <html>
                 <head>
@@ -56,7 +48,7 @@ class HtmlHelper
         {
             for ($j = 1; $j <= 10; $j++)
             {
-                $resultPageString.="<input type=\"checkbox\" name=\"".(string)$i."-".(string)$j."\" value='ship'>";
+                $resultPageString.="<input type=\"checkbox\" name=\"".(string)$i."-".(string)$j."\" value='".self::CELL_WITH_SHIP_STRING."'>";
             }
             $resultPageString.="<br>";
         }                   //нужно ли добавить условия проверки инициализации переменной
@@ -74,15 +66,6 @@ class HtmlHelper
     public static function getGamePage(string $currentPlayer, array $friendlyField,
                                        array $enemyField)
     {
-//        $currentPlayerNum=$_SESSION['currentPlayerNum'];
-//        if($currentPlayerNum===0){
-//            $friendlyField=Helper::loadFieldOneFromFile();
-//            $enemyField=Helper::loadFieldTwoFromFile();
-//        }else{
-//            $friendlyField=Helper::loadFieldTwoFromFile();
-//            $enemyField=Helper::loadFieldOneFromFile();
-//        }
-
         $resultPageString="<!DOCTYPE html>
               <html>
                 <head>  
@@ -122,23 +105,23 @@ class HtmlHelper
                 </body>
               </html>";
         $resultPageString.="<style>
-        .hide{
+        .".self::HIDE_CELL_CLASS_STRING."{
             background-color: gray;
         }
         
-        .breakShipCell{
+        .".self::BREAK_SHIP_CLASS_STRING."{
             background-color: red;
         }
         
-        .emptyCell{
+        .".self::EMPTY_CELL_CLASS_STRING."{
             background-color: white;
         }
         
-        .ship{
+        .".self::SHIP_CLASS_STRING."{
             background-color: green;
         }
         
-        .miss{
+        .".self::MISS_CELL_CLASS_STRING."{
             background-color: orange;
         }
         
