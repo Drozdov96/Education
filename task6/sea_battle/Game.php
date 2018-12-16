@@ -28,7 +28,6 @@ class Game
         $_SESSION['gameId']=$this->gameId;
     }
 
-    //TODO refactor this method.
     public function setField(int $fieldNum, string $field)
     {
         if($fieldNum===self::FIELD_ONE_NUM){
@@ -70,13 +69,6 @@ class Game
      */
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
-//        $step=[
-//            'x'=>$x,
-//            'y'=>$y,
-//            'playerNum'=>$currentPlayerNum
-//        ];
-//        array_push($this->steps, $step);
-
         if($currentPlayerNum===self::PLAYER_ONE_NUM){
             switch($this->fieldTwo->getCellState((int)$x,(int)$y)) {
                 case Cell::EMPTY_CELL_STATE: $this->fieldTwo->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);

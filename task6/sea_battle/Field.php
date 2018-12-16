@@ -1,8 +1,5 @@
 <?php
 
-//namespace sea_battle;
-//TODO make separate function to work with DB.
-
 class Field
 {
     protected $fieldId;
