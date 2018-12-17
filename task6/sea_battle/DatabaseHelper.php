@@ -2,14 +2,24 @@
 
 class DatabaseHelper
 {
+    /**
+     * @var PDO
+     */
     private static $dbc;
 
+    /**
+     *
+     */
     public static function getConnection(){
         //
         self::$dbc = new PDO("pgsql:host=/var/run/postgresql port=5432 
         dbname=battleship user=www-data");
     }
 
+    /**
+     * @param string $playerName
+     * @return int
+     */
     public static function getPlayerIdFromDb(string $playerName): int
     {
         if(!isset(self::$dbc)){
@@ -31,6 +41,11 @@ class DatabaseHelper
         return $id;
     }
 
+    /**
+     * @param int $idOne
+     * @param int $idTwo
+     * @return bool
+     */
     public static function createGame(int $idOne, int $idTwo)
     {
         if(!isset(self::$dbc)){
@@ -51,6 +66,11 @@ class DatabaseHelper
     }
 
 
+    /**
+     * @param int $gameId
+     * @param int $ownerId
+     * @return bool
+     */
     public static function createField(int $gameId, int $ownerId)
     {
         if(!isset(self::$dbc)){
@@ -84,7 +104,14 @@ class DatabaseHelper
         return $id;
     }
 
-    public static function createCell(int $fieldId, int $coordX,int $coordY,
+    /**
+     * @param int $fieldId
+     * @param int $coordX
+     * @param int $coordY
+     * @param string $state
+     * @return bool
+     */
+    public static function createCell(int $fieldId, int $coordX, int $coordY,
                                       string $state)
     {
         if(!isset(self::$dbc)){
@@ -105,6 +132,10 @@ class DatabaseHelper
         return $id;
     }
 
+    /**
+     * @param int $gameId
+     * @return array
+     */
     public static function loadGame(int $gameId): array
     {
         if(!isset(self::$dbc)){
@@ -119,6 +150,10 @@ class DatabaseHelper
         return $result;
     }
 
+    /**
+     * @param int $playerId
+     * @return string
+     */
     public static function loadPlayer(int $playerId): string
     {
         if(!isset(self::$dbc)){
@@ -134,6 +169,12 @@ class DatabaseHelper
         return $name;
     }
 
+    /**
+     * @param int $fieldId
+     * @param int $x
+     * @param int $y
+     * @return bool
+     */
     public static function loadCell(int $fieldId, int $x, int $y)
     {
         if(!isset(self::$dbc)){
@@ -148,6 +189,11 @@ class DatabaseHelper
         return $result;
     }
 
+    /**
+     * @param int $cellId
+     * @param string $state
+     * @return bool
+     */
     public static function changeCellState(int $cellId, string $state)
     {
         if(!isset(self::$dbc)){
@@ -158,6 +204,10 @@ class DatabaseHelper
             (string)$cellId);
     }
 
+    /**
+     * @param int $fieldId
+     * @return bool|int
+     */
     public static function getShipsNum(int $fieldId)
     {
         if(!isset(self::$dbc)){
@@ -172,6 +222,11 @@ class DatabaseHelper
         return $shipsNum;
     }
 
+    /**
+     * @param int $winnerId
+     * @param int $gameId
+     * @return bool
+     */
     public static function setWinnerAndTime(int $winnerId, int $gameId)
     {
         if(!isset(self::$dbc)){

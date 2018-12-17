@@ -3,8 +3,15 @@
 class Field
 {
     protected $fieldId;
+    /**
+     * @var array
+     */
     public $cellsArray;
 
+    /**
+     * @param int $gameId
+     * @param int $ownerId
+     */
     public function createField(int $gameId, int $ownerId)
     {
         $this->fieldId=DatabaseHelper::createField($gameId, $ownerId);
@@ -19,6 +26,9 @@ class Field
         }
     }
 
+    /**
+     * @param int $fieldId
+     */
     public function loadField(int $fieldId)
     {
         $this->fieldId=$fieldId;
@@ -34,6 +44,9 @@ class Field
         }
     }
 
+    /**
+     * @param string $fieldString
+     */
     public function fillWithShips(string $fieldString)
     {
         $ships=Helper::convertStringToFieldArray($fieldString);
@@ -50,6 +63,11 @@ class Field
         }
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @param string $state
+     */
     public function setCellState(int $x, int $y, string $state)
     {
         foreach ($this->cellsArray as &$cell){
@@ -60,6 +78,11 @@ class Field
         }
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @return string
+     */
     public function getCellState(int $x, int $y): string
     {
         foreach ($this->cellsArray as &$cell){
@@ -70,6 +93,9 @@ class Field
         return "";
     }
 
+    /**
+     * @return int
+     */
     public function getFieldId(): int
     {
         return $this->fieldId;

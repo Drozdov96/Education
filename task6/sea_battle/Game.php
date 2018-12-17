@@ -4,9 +4,21 @@ class Game
 {
     protected $gameId;
     protected $steps;
+    /**
+     * @var Field
+     */
     protected $fieldOne;
+    /**
+     * @var Field
+     */
     protected $fieldTwo;
+    /**
+     * @var Player
+     */
     public $playerOne;
+    /**
+     * @var Player
+     */
     public $playerTwo;
 
     public const FIELD_ONE_NUM=0;
@@ -14,6 +26,10 @@ class Game
     public const PLAYER_ONE_NUM=0;
     public const PLAYER_TWO_NUM=1;
 
+    /**
+     * @param string $playerOne
+     * @param string $playerTwo
+     */
     public function createGame(string $playerOne, string $playerTwo)
     {
         $this->steps=array();
@@ -28,6 +44,10 @@ class Game
         $_SESSION['gameId']=$this->gameId;
     }
 
+    /**
+     * @param int $fieldNum
+     * @param string $field
+     */
     public function setField(int $fieldNum, string $field)
     {
         if($fieldNum===self::FIELD_ONE_NUM){
@@ -43,17 +63,26 @@ class Game
         }
     }
 
+    /**
+     * @return array
+     */
     public function getFieldOne()
     {
         return $this->fieldOne->cellsArray;
     }
 
+    /**
+     * @return array
+     */
     public function getFieldTwo()
     {
         return $this->fieldTwo->cellsArray;
     }
 
-    //TODO discover usefulness of this function
+    /**
+     * @param int $fieldNum
+     * @return bool
+     */
     public function fieldEmpty(int $fieldNum): bool
     {
         if($fieldNum===self::FIELD_ONE_NUM){
@@ -66,6 +95,12 @@ class Game
     /*
      * Функция обрабатывает ход игрока, делает соответствующие изменения в полях и возвращает
      * игрока, который будет делать следующий ход.
+     */
+    /**
+     * @param string $x
+     * @param string $y
+     * @param int $currentPlayerNum
+     * @return int
      */
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
@@ -89,6 +124,9 @@ class Game
         return $currentPlayerNum;
     }
 
+    /**
+     * @param int $gameId
+     */
     public function loadGame(int $gameId)
     {
         $this->gameId=$gameId;
@@ -109,6 +147,10 @@ class Game
         }
     }
 
+    /**
+     * @param int $currentPlayer
+     * @return bool
+     */
     public function checkEndGame(int $currentPlayer): bool
     {
         if($currentPlayer===self::PLAYER_ONE_NUM){

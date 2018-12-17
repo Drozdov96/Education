@@ -11,8 +11,17 @@ class Cell
      * miss= клетка в которую выстрелили и попали в пустую клетку;
      */
     protected $cellId;
+    /**
+     * @var string
+     */
     public $cellState;
+    /**
+     * @var int
+     */
     public $coordinateX;
+    /**
+     * @var int
+     */
     public $coordinateY;
 
     //пробелы добавлены из-за особенности хранения этого поля в базе данных
@@ -23,6 +32,13 @@ class Cell
     public const CREATE_ACTION='create';
     public const LOAD_ACTION='load';
 
+    /**
+     * Cell constructor.
+     * @param string $action
+     * @param int $x
+     * @param int $y
+     * @param int $fieldId
+     */
     public function __construct(string $action, int $x, int $y, int $fieldId){
 
         $this->coordinateX=$x;
@@ -41,6 +57,9 @@ class Cell
         }
     }
 
+    /**
+     * @param string $state
+     */
     public function setCellState(string $state)
     {
         $this->cellState=$state;

@@ -5,6 +5,10 @@ class Application
     protected $game;
     public const NEW_GAME_NUM=-1;
 
+    /**
+     * Application constructor.
+     * @param int $gameId
+     */
     public function __construct(int $gameId)
     {
         DatabaseHelper::getConnection();
@@ -16,7 +20,6 @@ class Application
         }
     }
 
-    //TODO maybe refactor this
     protected function runPlacementPhase()
     {
         if(isset($_POST['submit_btn_place'])) {
@@ -83,6 +86,9 @@ class Application
         }
     }
 
+    /**
+     * @param string $state
+     */
     public function doRoute(string $state)
     {
         switch ($state){

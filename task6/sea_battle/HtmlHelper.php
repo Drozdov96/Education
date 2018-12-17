@@ -9,6 +9,9 @@ class HtmlHelper
     public const MISS_CELL_CLASS_STRING='miss';
     public const HIDE_CELL_CLASS_STRING='hide';
 
+    /**
+     * @return string
+     */
     public static function getPlayersNamePage(): string
     {
         return "<!DOCTYPE html>
@@ -32,6 +35,10 @@ class HtmlHelper
               </html>";
     }
 
+    /**
+     * @param string $playerName
+     * @return string
+     */
     public static function getShipsPlacementPage(string $playerName): string
     {
         $resultPageString="<!DOCTYPE html>
@@ -63,6 +70,12 @@ class HtmlHelper
         return $resultPageString;
     }
 
+    /**
+     * @param string $currentPlayer
+     * @param array $friendlyField
+     * @param array $enemyField
+     * @return string
+     */
     public static function getGamePage(string $currentPlayer, array $friendlyField,
                                        array $enemyField)
     {
@@ -153,6 +166,10 @@ class HtmlHelper
         return $resultPageString;
     }
 
+    /**
+     * @param string $winnerName
+     * @return string
+     */
     public static function getEndGamePage(string $winnerName)
     {
         return "<!DOCTYPE html>

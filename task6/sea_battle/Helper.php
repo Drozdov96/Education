@@ -3,6 +3,10 @@
 class Helper
 {
 
+    /**
+     * @param array $fieldArray
+     * @return string
+     */
     public static function convertFieldArrayToString(array $fieldArray): string
     {
         $resultString="";
@@ -17,6 +21,10 @@ class Helper
         return trim($resultString);
     }
 
+    /**
+     * @param string $fieldKeysString
+     * @return array
+     */
     public static function convertStringToFieldArray(string $fieldKeysString): array
     {
         $initialKeysArray=explode(" ",$fieldKeysString);
@@ -29,6 +37,10 @@ class Helper
         return $newKeysArray;
     }
 
+    /**
+     * @param array $fieldArray
+     * @return bool
+     */
     public static function verifyInputFieldArray(array $fieldArray): bool
     {
         $oneDeckCount=0;
@@ -64,6 +76,13 @@ class Helper
         return true;
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @param array $fieldArray
+     * @param int $deckCount
+     * @return int
+     */
     public static function checkShip(int $x, int $y, array &$fieldArray, int $deckCount)
     {
         $deckCount++;
@@ -91,6 +110,11 @@ class Helper
         }
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @param array $fieldArray
+     */
     public static function switchCoordinatesToNeighbourShip(int &$x, int &$y, array $fieldArray)
     {
         if(!empty($fieldArray[(string)($x+1).'-'.(string)($y)]) &&
@@ -108,7 +132,13 @@ class Helper
         }
     }
 
-    public static function checkNearShipsNum(int $x,int $y,array $fieldArray): int
+    /**
+     * @param int $x
+     * @param int $y
+     * @param array $fieldArray
+     * @return int
+     */
+    public static function checkNearShipsNum(int $x, int $y, array $fieldArray): int
     {
         $resultNum=0;
         if(!empty($fieldArray[(string)($x+1).'-'.(string)($y)]) &&
@@ -130,6 +160,12 @@ class Helper
         return $resultNum;
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @param array $fieldArray
+     * @return bool
+     */
     public static function checkExistDiagonalNodes(int $x, int $y, array $fieldArray): bool
     {
         if(!empty($fieldArray[(string)($x+1).'-'.(string)($y+1)])){
@@ -144,6 +180,12 @@ class Helper
         return false;
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @param array $field
+     * @return string
+     */
     public static function getEnemyClass(int $x, int $y, array $field): string
     {
         foreach ($field as $value){
@@ -159,6 +201,12 @@ class Helper
         }
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @param array $field
+     * @return string
+     */
     public static function getFriendlyClass(int $x, int $y, array $field): string
     {
         foreach ($field as $value){
