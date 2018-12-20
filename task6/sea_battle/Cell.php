@@ -39,17 +39,17 @@ class Cell
      * @param int $y
      * @param int $fieldId
      */
-    public function __construct(string $action, int $x, int $y, int $fieldId){
-
+    public function __construct(string $action, int $x, int $y, int $fieldId)
+    {
         $this->coordinateX=$x;
         $this->coordinateY=$y;
         switch ($action){
-            case CREATE_ACTION:
-                $this->cellState=EMPTY_CELL_STATE;
+            case self::CREATE_ACTION:
+                $this->cellState=self::EMPTY_CELL_STATE;
                 $this->cellId=DatabaseHelper::createCell($fieldId, $x, $y,
                     $this->cellState);
                 break;
-            case LOAD_ACTION:
+            case self::LOAD_ACTION:
                 $cellParamsArray=DatabaseHelper::loadCell($fieldId, $x, $y);
                 $this->cellId=$cellParamsArray['id'];
                 $this->cellState=$cellParamsArray['state'];
