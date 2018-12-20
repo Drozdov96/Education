@@ -117,7 +117,7 @@ class Game
                 case Cell::EMPTY_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
                     $currentPlayerNum=self::PLAYER_ONE_NUM;
                     break;
-                case Cell::SHIP_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
+                case Cell::SHIP_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::HIT_CELL_STATE);
                     break;
             }
         }
