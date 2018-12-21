@@ -13,7 +13,7 @@ class DomainObject
 {
     private $stateA = 'checkout';
     private $stateB = 'checkout';
-composer require winzou/state-machine
+
     public function getStateA()
     {
         return $this->stateA;

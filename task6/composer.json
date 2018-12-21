@@ -1,0 +1,5 @@
+{
+    "require": {
+        "winzou/state-machine": "^0.3.3"
+    }
+}
