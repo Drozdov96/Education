@@ -1,5 +1,122 @@
 [
     {
+        "name": "metabor/metabor-std",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Metabor/MetaborStd.git",
+            "reference": "a0267749da3e2fe4353cd4a790e66615e3b0c15a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Metabor/MetaborStd/zipball/a0267749da3e2fe4353cd4a790e66615e3b0c15a",
+            "reference": "a0267749da3e2fe4353cd4a790e66615e3b0c15a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*"
+        },
+        "suggest": {
+            "metabor/statemachine": "Working implementation of the statemachine interfaces"
+        },
+        "time": "2016-12-14T17:20:03+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "MetaborStd\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Oliver Tischlinger",
+                "email": "oliver.tischlinger@metabor.de"
+            }
+        ],
+        "description": "Collection of maximal independent PHP Interfaces",
+        "keywords": [
+            "api",
+            "interfaces",
+            "standard"
+        ]
+    },
+    {
+        "name": "metabor/statemachine",
+        "version": "v2.0.1",
+        "version_normalized": "2.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Metabor/Statemachine.git",
+            "reference": "28748b91d6c34e966420f209232a6ae6f0b5809b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Metabor/Statemachine/zipball/28748b91d6c34e966420f209232a6ae6f0b5809b",
+            "reference": "28748b91d6c34e966420f209232a6ae6f0b5809b",
+            "shasum": ""
+        },
+        "require": {
+            "metabor/metabor-std": "~2.0.0",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "clue/graph": "*",
+            "codacy/coverage": "*",
+            "phpunit/phpunit": "*",
+            "psr/log": "*",
+            "symfony/expression-language": "*"
+        },
+        "suggest": {
+            "clue/graph": "For displaying process graph",
+            "graphp/graphviz": "For displaying process graph",
+            "metabor/statemachine-doctrine-bridge": "Integrates Doctrine to persit and define status and processes for the statemachine",
+            "symfony/expression-language": "To use symfony expressions as conditions"
+        },
+        "time": "2017-05-30T11:51:45+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Metabor\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Oliver Tischlinger",
+                "email": "oliver.tischlinger@metabor.de"
+            }
+        ],
+        "description": "Statemachine in PHP 5.3",
+        "keywords": [
+            "process",
+            "state machine",
+            "statemachine",
+            "status"
+        ]
+    },
+    {
         "name": "psr/cache",
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",

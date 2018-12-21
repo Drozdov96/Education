@@ -7,6 +7,10 @@ class Field
      * @var array
      */
     public $cellsArray;
+    /**
+     * @var CellStateMachine
+     */
+    public $stateMachine;
 
     /**
      * @param int $gameId
@@ -24,6 +28,8 @@ class Field
                 $this->cellsArray[]=new Cell(Cell::CREATE_ACTION,$i,$j, $this->fieldId);
             }
         }
+
+        $this->stateMachine=new CellStateMachine(current($this->cellsArray));
     }
 
     /**

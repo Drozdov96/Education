@@ -1,5 +1,15 @@
 {
+    "name": "user/task6",
+    "description": "none",
+    "type": "project",
+    "license": "none",
     "require": {
-        "winzou/state-machine": "^0.3.3"
+        "winzou/state-machine": "^0.3.3",
+        "metabor/statemachine": "^2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "Model/"
+        ]
     }
 }

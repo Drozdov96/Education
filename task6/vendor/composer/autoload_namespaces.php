@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SM' => array($vendorDir . '/winzou/state-machine/src'),
+    'Metabor\\' => array($vendorDir . '/metabor/statemachine/src'),
+    'MetaborStd\\' => array($vendorDir . '/metabor/metabor-std/src'),
 );

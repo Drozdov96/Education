@@ -85,6 +85,29 @@ class ComposerStaticInit8c902abb71782ff3ddfbd7885af95ac3
                 0 => __DIR__ . '/..' . '/winzou/state-machine/src',
             ),
         ),
+        'M' => 
+        array (
+            'Metabor\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/metabor/statemachine/src',
+            ),
+            'MetaborStd\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/metabor/metabor-std/src',
+            ),
+        ),
+    );
+
+    public static $classMap = array (
+        'Application' => __DIR__ . '/../..' . '/Model/Application.php',
+        'Cell' => __DIR__ . '/../..' . '/Model/Cell.php',
+        'CellStateMachine' => __DIR__ . '/../..' . '/Model/CellStateMachine.php',
+        'DatabaseHelper' => __DIR__ . '/../..' . '/Model/DatabaseHelper.php',
+        'Field' => __DIR__ . '/../..' . '/Model/Field.php',
+        'Game' => __DIR__ . '/../..' . '/Model/Game.php',
+        'Helper' => __DIR__ . '/../..' . '/Model/Helper.php',
+        'HtmlHelper' => __DIR__ . '/../..' . '/Model/HtmlHelper.php',
+        'Player' => __DIR__ . '/../..' . '/Model/Player.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -93,6 +116,7 @@ class ComposerStaticInit8c902abb71782ff3ddfbd7885af95ac3
             $loader->prefixLengthsPsr4 = ComposerStaticInit8c902abb71782ff3ddfbd7885af95ac3::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit8c902abb71782ff3ddfbd7885af95ac3::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit8c902abb71782ff3ddfbd7885af95ac3::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8c902abb71782ff3ddfbd7885af95ac3::$classMap;
 
         }, null, ClassLoader::class);
     }
