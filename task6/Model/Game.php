@@ -99,25 +99,17 @@ class Game
     /**
      * @param string $x
      * @param string $y
-     * @param int $currentPlayerNum
-     * @return int
      */
-    public function doStep(string $x, string $y, int $currentPlayerNum)
+    public function doStep(string $x, string $y)
     {
+        $currentPlayerNum=$_SESSION['currentPlayerNum'];
         if($currentPlayerNum===self::PLAYER_ONE_NUM){
             $this->fieldTwo->setCellState((int)$x, (int)$y,
                 CellStateMachine::STRIKE_TRANSITION);
-            if($this->fieldTwo->getCellState((int)$x, (int)$y)===Cell::MISS_CELL_STATE){
-                $currentPlayerNum=self::PLAYER_TWO_NUM;
-            }
         }else{
             $this->fieldOne->setCellState((int)$x, (int)$y,
                 CellStateMachine::STRIKE_TRANSITION);
-            if($this->fieldOne->getCellState((int)$x, (int)$y)===Cell::MISS_CELL_STATE){
-                $currentPlayerNum=self::PLAYER_ONE_NUM;
-            }
         }
-        return $currentPlayerNum;
     }
 
     /**

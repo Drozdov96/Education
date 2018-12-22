@@ -86,6 +86,13 @@ class Field
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
                 $this->stateMachine->setObject($cell);
                 $this->stateMachine->apply($transition, true);
+
+
+                if($this->stateMachine->getState()===Cell::MISS_CELL_STATE){
+                    $_SESSION['currentPlayerNum']===Game::PLAYER_ONE_NUM?
+                        $_SESSION['currentPlayerNum']=Game::PLAYER_TWO_NUM :
+                        $_SESSION['currentPlayerNum']=Game::PLAYER_ONE_NUM;
+                }
                 return;
             }
         }

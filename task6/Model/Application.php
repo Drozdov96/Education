@@ -64,11 +64,9 @@ class Application
             $this->game->getFieldOne(), $this->game->getFieldTwo());
     }
 
-    protected function doStep(string $x, string $y,  int $currentPlayerNum)
+    protected function doStep(string $x, string $y)
     {
-        //Доработать вывод, функция возвращает текущего игрока.
-        $_SESSION['currentPlayerNum']=$this->game->
-        doStep($x, $y, $currentPlayerNum);
+        $this->game->doStep($x, $y);
 
         if($this->game->checkEndGame($_SESSION['currentPlayerNum'])){
             unset($_SESSION['gameId']);
@@ -99,7 +97,7 @@ class Application
                 $this->runGame();
                 break;
             case 'doStep':
-                $this->doStep($_GET['x'], $_GET['y'], $_SESSION['currentPlayerNum']);
+                $this->doStep($_GET['x'], $_GET['y']);
                 unset($_GET['x'], $_GET['y']);
                 break;
             case 'setNames':
