@@ -6,6 +6,9 @@ use SM\SMException;
 
 class CellStateMachine extends SM\StateMachine\StateMachine
 {
+    public const PLACE_TRANSITION='place';
+    public const STRIKE_TRANSITION='strike';
+
     protected const STATE_MACHINE_CONFIG = array(
         'graph'         => 'cellGraph', // Name of the current graph - there can be many of them attached to the same object
         'property_path' => 'cellState',  // Property path of the object actually holding the state
@@ -16,11 +19,11 @@ class CellStateMachine extends SM\StateMachine\StateMachine
             Cell::MISS_CELL_STATE
         ),
         'transitions' => array(
-            'place' => array(
+            self::PLACE_TRANSITION => array(
                 'from' => array(Cell::EMPTY_CELL_STATE),
                 'to'   => array(Cell::SHIP_CELL_STATE)
             ),
-            'strike' => array(
+            self::STRIKE_TRANSITION => array(
                 'from' => array(Cell::EMPTY_CELL_STATE, Cell::SHIP_CELL_STATE),
                 'to'   => array(Cell::MISS_CELL_STATE, Cell::HIT_CELL_STATE)
             )
@@ -70,7 +73,6 @@ class CellStateMachine extends SM\StateMachine\StateMachine
         $this->callCallbacks($event, 'before');
 
         $stateKey= array_search($this->getState(), $this->config['transitions'][$transition]['from']);
-        var_dump($stateKey);
 
 
         $this->setState($this->config['transitions'][$transition]['to'][$stateKey]);

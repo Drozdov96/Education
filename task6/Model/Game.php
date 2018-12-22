@@ -68,7 +68,7 @@ class Game
      */
     public function getFieldOne()
     {
-        return $this->fieldOne->cellsArray;
+        return $this->fieldOne->getcellsArray();
     }
 
     /**
@@ -76,7 +76,7 @@ class Game
      */
     public function getFieldTwo()
     {
-        return $this->fieldTwo->cellsArray;
+        return $this->fieldTwo->getCellsArray();
     }
 
     /**
@@ -105,20 +105,16 @@ class Game
     public function doStep(string $x, string $y, int $currentPlayerNum)
     {
         if($currentPlayerNum===self::PLAYER_ONE_NUM){
-            switch($this->fieldTwo->getCellState((int)$x,(int)$y)) {
-                case Cell::EMPTY_CELL_STATE: $this->fieldTwo->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
-                    $currentPlayerNum=self::FIELD_TWO_NUM;
-                    break;
-                case Cell::SHIP_CELL_STATE: $this->fieldTwo->setCellState((int)$x,(int)$y, Cell::HIT_CELL_STATE);
-                    break;
+            $this->fieldTwo->setCellState((int)$x, (int)$y,
+                CellStateMachine::STRIKE_TRANSITION);
+            if($this->fieldTwo->getCellState((int)$x, (int)$y)===Cell::MISS_CELL_STATE){
+                $currentPlayerNum=self::PLAYER_TWO_NUM;
             }
         }else{
-            switch($this->fieldOne->getCellState((int)$x,(int)$y)) {
-                case Cell::EMPTY_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::MISS_CELL_STATE);
-                    $currentPlayerNum=self::PLAYER_ONE_NUM;
-                    break;
-                case Cell::SHIP_CELL_STATE: $this->fieldOne->setCellState((int)$x,(int)$y, Cell::HIT_CELL_STATE);
-                    break;
+            $this->fieldOne->setCellState((int)$x, (int)$y,
+                CellStateMachine::STRIKE_TRANSITION);
+            if($this->fieldOne->getCellState((int)$x, (int)$y)===Cell::MISS_CELL_STATE){
+                $currentPlayerNum=self::PLAYER_ONE_NUM;
             }
         }
         return $currentPlayerNum;

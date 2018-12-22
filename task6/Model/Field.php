@@ -6,7 +6,7 @@ class Field
     /**
      * @var array
      */
-    public $cellsArray;
+    protected $cellsArray;
     /**
      * @var CellStateMachine
      */
@@ -25,7 +25,8 @@ class Field
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[]=new Cell(Cell::CREATE_ACTION,$i,$j, $this->fieldId);
+                $this->cellsArray[]=new Cell(Cell::CREATE_ACTION,$i,$j,
+                    $this->fieldId);
             }
         }
 
@@ -45,9 +46,11 @@ class Field
         {
             for($j=1;$j<=10;$j++)
             {
-                $this->cellsArray[]=new Cell(Cell::LOAD_ACTION, $i,$j, $this->fieldId);
+                $this->cellsArray[]=new Cell(Cell::LOAD_ACTION, $i,$j,
+                    $this->fieldId);
             }
         }
+        $this->stateMachine=new CellStateMachine(current($this->cellsArray));
     }
 
     /**
@@ -63,7 +66,10 @@ class Field
                 reset($value);
                 if($cell->coordinateX===(int)current($value) &&
                     $cell->coordinateY===(int)next($value)){
-                    $cell->setCellState(Cell::SHIP_CELL_STATE);
+
+                    $this->stateMachine->setObject($cell);
+                    $this->stateMachine->apply
+                    (CellStateMachine::PLACE_TRANSITION, true);
                 }
             }
         }
@@ -72,17 +78,20 @@ class Field
     /**
      * @param int $x
      * @param int $y
-     * @param string $state
+     * @param string $transition
      */
-    public function setCellState(int $x, int $y, string $state)
+    public function setCellState(int $x, int $y, string $transition)
     {
         foreach ($this->cellsArray as &$cell){
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
-                $cell->setCellState($state);
+                $this->stateMachine->setObject($cell);
+                $this->stateMachine->apply($transition, true);
                 return;
             }
         }
     }
+
+
 
     /**
      * @param int $x
@@ -93,10 +102,16 @@ class Field
     {
         foreach ($this->cellsArray as &$cell){
             if($cell->coordinateX===$x && $cell->coordinateY===$y){
-                return $cell->cellState;
+                $this->stateMachine->setObject($cell);
+                return $this->stateMachine->getState();
             }
         }
         return "";
+    }
+
+    public function getCellsArray(): array
+    {
+        return $this->cellsArray;
     }
 
     /**
