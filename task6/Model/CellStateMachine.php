@@ -29,6 +29,18 @@ class CellStateMachine extends SM\StateMachine\StateMachine
                     'from' => array(Cell::EMPTY_CELL_STATE, Cell::SHIP_CELL_STATE),
                     'to'   => array(Cell::MISS_CELL_STATE, Cell::HIT_CELL_STATE)
                 )
+            ),
+            'callbacks' => array(
+                'after' => array(
+                    'to-miss' => array(
+                        'to' => array(Cell::MISS_CELL_STATE),
+                        'do' => function() {
+                            $_SESSION['currentPlayerNum']===Game::PLAYER_ONE_NUM ?
+                                $_SESSION['currentPlayerNum']=Game::PLAYER_TWO_NUM :
+                                $_SESSION['currentPlayerNum']=Game::PLAYER_ONE_NUM;
+                        }
+                    )
+                )
             )
         );
         parent::__construct($object, $config, $dispatcher, $callbackFactory);
@@ -76,12 +88,23 @@ class CellStateMachine extends SM\StateMachine\StateMachine
 
         $this->setState($this->config['transitions'][$transition]['to'][$stateKey]);
 
-        $this->callCallbacks($event, 'after');
+        $this->callCallbackAfter();
 
         if (null !== $this->dispatcher) {
             $this->dispatcher->dispatch(SMEvents::POST_TRANSITION, $event);
         }
 
         return true;
+    }
+
+    protected function callCallbackAfter()
+    {
+        foreach ($this->config['callbacks']['after'] as $callback){
+            foreach ($callback['to'] as $resultNode){
+                if($resultNode===$this->getState()){
+                    call_user_func($callback['do']);
+                }
+            }
+        }
     }
 }
