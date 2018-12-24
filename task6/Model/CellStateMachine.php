@@ -46,6 +46,9 @@ class CellStateMachine extends SM\StateMachine\StateMachine
         parent::__construct($object, $config, $dispatcher, $callbackFactory);
     }
 
+    /**
+     * @param $object
+     */
     public function setObject($object)
     {
         if(get_class($object)===get_class($this->object)){
@@ -54,6 +57,12 @@ class CellStateMachine extends SM\StateMachine\StateMachine
 
     }
 
+    /**
+     * @param string $transition
+     * @param bool $soft
+     * @return bool
+     * @throws SMException
+     */
     public function apply($transition, $soft = false)
     {
 

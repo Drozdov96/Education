@@ -76,6 +76,7 @@ class Field
     }
 
     /**
+     * Set state of cell with given coordinates
      * @param int $x
      * @param int $y
      * @param string $transition
@@ -94,6 +95,7 @@ class Field
 
 
     /**
+     * Return state of cell with given coordinates
      * @param int $x
      * @param int $y
      * @return string
@@ -109,6 +111,9 @@ class Field
         return "";
     }
 
+    /**
+     * @return array
+     */
     public function getCellsArray(): array
     {
         return $this->cellsArray;
