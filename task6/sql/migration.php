@@ -1,8 +1,9 @@
 <?php
 // Объявляем нужные константы
-define('DB_HOST', '/var/run/postgresql');
+///var/run/postgresql
+define('DB_HOST', 'localhost');
 define('DB_USER', 'www-data');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', '5621');
 define('DB_NAME', 'battleship');
 define('DB_TABLE_VERSIONS', 'versions');
 
@@ -10,7 +11,7 @@ define('DB_TABLE_VERSIONS', 'versions');
 // Подключаемся к базе данных
 function connectDB() {
     $conn = new PDO("pgsql:host=".DB_HOST." port=5432 
-        dbname=".DB_NAME." user=".DB_USER);
+        dbname=".DB_NAME." user=".DB_USER." password=".DB_PASSWORD);
     return $conn;
 }
 

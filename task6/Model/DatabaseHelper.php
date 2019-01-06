@@ -12,8 +12,8 @@ class DatabaseHelper
      */
     public static function getConnection(){
         //
-        self::$dbc = new PDO("pgsql:host=/var/run/postgresql port=5432 
-        dbname=battleship user=www-data");
+        self::$dbc = new PDO("pgsql:host=localhost port=5432 
+        dbname=battleship user=www-data password=5621");
     }
 
     /**
