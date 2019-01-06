@@ -1,6 +1,7 @@
 <?php
 
-require './task6/vendor/autoload.php';
+require './course/task6/vendor/autoload.php';
+
 
 session_start();
 
